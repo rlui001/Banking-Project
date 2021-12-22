@@ -2,22 +2,16 @@ import sys
 
 def startMenu ():
     """
-    Triggers the start menu for a user to use as the interface with the banking system.
+    Triggers the start menu for a user to use as the interface with the banking system. Returns menu string.
     """
-    return """
+    menu = """
     Welcome to the Lui Banking System. Please select an option:  
         1. New customer
         2. Existing customer
         3. Employee login
         4. Exit
     """
-    print ('-------------------------------------------------------------\n')
-    print ('Welcome to the Lui Banking System. Please select an option:  \n')
-    print ('1. New customer  \n')
-    print ('2. Existing customer  \n')
-    print ('3. Employee login  \n')
-    print ('4. Exit \n')
-    print ('-------------------------------------------------------------\n')
+    return menu
 
 def newCustomer():
     """
