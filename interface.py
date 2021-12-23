@@ -33,6 +33,7 @@ if __name__ == "__main__":
     #db connection should be set up here
 
     usr_input = input(startMenu())
+    
     while True:
         if usr_input == '1':
             print ('Do something with newCustomer()')
