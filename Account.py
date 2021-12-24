@@ -1,7 +1,4 @@
 
-from typing import Type
-
-
 class Account:
     
     def __init__ (self, id, balance=0):
