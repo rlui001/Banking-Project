@@ -45,6 +45,11 @@ class Customer:
     def address (self, address):
         self._address = address
 
+    @property
+    def ssn (self):
+        return self._ssn
+    
+
     
 
     
