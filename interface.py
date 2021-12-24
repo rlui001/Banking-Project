@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, exc
 from Customer import Customer
-import sys
 import helper
+import sys
 
 
 def startMenu ():

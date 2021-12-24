@@ -1,3 +1,5 @@
+import helper
+
 class Customer:
 
     def __init__ (self, ssn, first, last, address):
@@ -56,7 +58,7 @@ class Customer:
         1. Update first name
         2. Update last name
         3. Update address
-        4. Check existing accounts
+        4. Access accounts
         5. Create a savings account
         6. Request a service
         7. Request account termination
@@ -68,11 +70,19 @@ class Customer:
             usr_input = input(f'[Connected - {self._first}]: ')
 
             if usr_input == '1':
+                self._first = helper.request_input('First name', 'alpha')
+                print ('First name updated.\n')
                 customer_updated = True
                 pass
             elif usr_input == '2':
+                self._last = helper.request_input('Last name', 'alpha')
+                print ('Last name updated.\n')
+                customer_updated = True
                 pass
             elif usr_input == '3':
+                self._address = helper.request_input('Home Address', 'alphanumeric')
+                print ('Address updated.\n')
+                customer_updated = True
                 pass
             elif usr_input == '4':
                 pass
