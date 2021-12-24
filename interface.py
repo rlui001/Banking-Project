@@ -15,12 +15,13 @@ def startMenu ():
     """
     return menu
 
-def newCustomer():
+def newCustomer(conn):
     """
     Function to create a new customer and append to database. Returns None.
     """
     first = helper.request_input('First name', 'alpha')
     last = helper.request_input('Last name', 'alpha')
+    print(f'Your name is {first} {last}')
 
 
     pass
