@@ -66,6 +66,7 @@ class Customer:
         customer_updated = False
 
         while True:
+            print (menu)
             usr_input = input(f'[Connected - {self._first}]: ')
 
             if usr_input == '1':
@@ -85,6 +86,9 @@ class Customer:
                 pass
             elif usr_input == '4':
                 # sql pull from database to grab existing accounts
+                stmt = "SELECT * FROM Account WHERE cid = %s"
+                result = conn.execute(stmt, self._ssn)
+                print ([row for row in result])
                 # user selects which account to access 
                 # load into account object
                 # allow modification of account object, including termination
