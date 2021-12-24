@@ -27,7 +27,7 @@ def newCustomer(conn):
     address = helper.request_input('Home Address', 'alphanumeric')
     ssn = helper.request_input('Social Security Number', 'numeric')
  
-    customer = Customer(first, last, address, ssn)
+    customer = Customer(ssn, first, last, address)
     print (str(customer))
 
     stmt = "INSERT INTO Customer VALUES (%s, %s, %s, %s)"
@@ -41,10 +41,22 @@ def newCustomer(conn):
     except exc.SQLAlchemyError as e:
         print (f"Failed due to: {e}")
 
-def loginCustomer():
+def loginCustomer(conn):
     """
-    Function to retrieve customer data from database and return as a Customer object.
+    Function to retrieve customer data from database and return a Customer object.
     """
+
+    ssn = input('Please enter your SSN to login: ')
+    stmt = "SELECT * FROM Customer WHERE ssn = %s"
+    try:
+        result = conn.execute(stmt, ssn).first()
+        if not result:
+            raise ValueError("No customer with that SSN found.")
+        return Customer(str(result[0]), result[1], result[2], result[3])
+
+    except exc.SQLAlchemyError as e:
+        print (e)
+
     pass
 
 
@@ -61,11 +73,17 @@ if __name__ == "__main__":
         while usr_input != '4':
 
             if usr_input == '1':
+                # New customer record created in database
                 newCustomer(conn)
                 break
 
             elif usr_input == '2':
+                # Customer successfully logins and is able to access customer menu
                 print ('Do something with loginCustomer()')
+                customer = loginCustomer(conn)
+                print (f'Welcome back to LuiBank, {customer.first}./n')
+
+                print ('Build customer menu')
                 break
             elif usr_input == '3':
                 print ('Do something with employee')

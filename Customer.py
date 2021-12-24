@@ -1,6 +1,6 @@
 class Customer:
 
-    def __init__ (self, first, last, address, ssn):
+    def __init__ (self, ssn, first, last, address):
         """
         first: String argument, first name of customer
         last: String argument, last name of customer
