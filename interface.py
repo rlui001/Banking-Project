@@ -35,7 +35,11 @@ def newCustomer(conn):
     try:
         #attempt to add record to Customer table
         conn.execute(stmt, val)
-        print ('Registered successfully.\n')
+        #
+        # TO-DO add code to create a checking account for customer
+        #
+
+        print ('Registered successfully. A checking account has also been created automatically.\n')
         return True
 
     except exc.SQLAlchemyError as e:
