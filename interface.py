@@ -1,6 +1,8 @@
 from sqlalchemy import create_engine, exc
+from Customer import Customer
 import sys
 import helper
+
 
 def startMenu ():
     """
@@ -21,8 +23,11 @@ def newCustomer(conn):
     """
     first = helper.request_input('First name', 'alpha')
     last = helper.request_input('Last name', 'alpha')
-    print(f'Your name is {first} {last}')
-
+    address = helper.request_input('Home Address', 'alpha')
+    ssn = helper.request_input('Social Security Number', 'numeric')
+ 
+    customer = Customer(first, last, address, ssn)
+    print (str(customer))
 
     pass
 

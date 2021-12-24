@@ -17,6 +17,9 @@ class Customer:
                 raise ValueError('Social security number should be digits only.')
         else:
             raise ValueError('Social security number should consist of 9 digits.')
+
+    def __str__ (self):
+        return f'Name: {self._first} {self._last} \nAddress: {self._address} \nSSN: {self._ssn}\n'
             
     @property
     def first (self):
