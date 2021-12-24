@@ -30,15 +30,18 @@ def newCustomer(conn):
     customer = Customer(ssn, first, last, address)
     print (str(customer))
 
-    stmt = "INSERT INTO Customer VALUES (%s, %s, %s, %s)"
-    val = (customer.ssn, customer.first, customer.last, customer.address)
+    stmt_c = "INSERT INTO Customer VALUES (%s, %s, %s, %s)"
+    val_c = (customer.ssn, customer.first, customer.last, customer.address)
+    stmt_a = "INSERT INTO Account (cid, balance, rate, account_type, terminate) VALUES (%s, %s, %s, %s, %s)"
+    val_a = (customer.ssn, 0, 0.0, 'Checking', False)
     try:
         #attempt to add record to Customer table
-        conn.execute(stmt, val)
-        #
-        # TO-DO add code to create a checking account for customer
-        #
-
+        conn.execute(stmt_c, val_c)
+        try:
+            #attempt to add record to Account table
+            conn.execute(stmt_a, val_a)
+        except exc.SQLAlchemyError as e:
+            print (f'failed due to: {e}')
         print ('Registered successfully. A checking account has also been created automatically.\n')
         return True
 
