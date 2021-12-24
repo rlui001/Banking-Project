@@ -60,7 +60,7 @@ class Customer:
         3. Update address
         4. Access accounts
         5. Create a savings account
-        6. Request a service
+        6. Services
         7. Request account termination
         8. Quit
         """
@@ -85,12 +85,27 @@ class Customer:
                 customer_updated = True
                 pass
             elif usr_input == '4':
+                # sql pull from database to grab existing accounts
+                # user selects which account to access 
+                # load into account object
+                # allow modification of account object
+                # push changes to db
                 pass
             elif usr_input == '5':
+                # request input for savings account object
+                # create account object
+                # push insert to db
                 pass
             elif usr_input == '6':
+                # request/view services
+                # pick service type
+                # pick amount request
+                # submit to db which needs to be approved
                 pass
             elif usr_input == '7':
+                # sql pull from database to grab existing accounts
+                # user selects which account to terminate
+                # request is sent in to DB to update status
                 pass
             elif usr_input == '8':
                 if customer_updated:

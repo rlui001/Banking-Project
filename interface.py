@@ -4,7 +4,7 @@ import helper
 import sys
 
 
-def startMenu ():
+def startMenu():
     """
     Triggers the start menu for a user to use as the interface with the banking system. Returns menu string.
     """
