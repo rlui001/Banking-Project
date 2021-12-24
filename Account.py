@@ -30,6 +30,6 @@ class Account:
             raise ValueError('Balance cannot be negative.')
         self._balance -= int(amount)
 
-    def terminate(self):
+    def terminate(self, conn):
         # set terminate status to True
         pass

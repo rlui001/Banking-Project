@@ -61,8 +61,7 @@ class Customer:
         4. Access accounts
         5. Create a savings account
         6. Services
-        7. Request account termination
-        8. Quit
+        7. Quit
         """
         customer_updated = False
 
@@ -88,7 +87,7 @@ class Customer:
                 # sql pull from database to grab existing accounts
                 # user selects which account to access 
                 # load into account object
-                # allow modification of account object
+                # allow modification of account object, including termination
                 # push changes to db
                 pass
             elif usr_input == '5':
@@ -103,11 +102,6 @@ class Customer:
                 # submit to db which needs to be approved
                 pass
             elif usr_input == '7':
-                # sql pull from database to grab existing accounts
-                # user selects which account to terminate
-                # request is sent in to DB to update status
-                pass
-            elif usr_input == '8':
                 if customer_updated:
                     print(str(self))
                     usr_input = input('Personal info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: \n')
