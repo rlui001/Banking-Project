@@ -19,7 +19,7 @@ def startMenu ():
 
 def newCustomer(conn):
     """
-    Function to create a new customer and append to database. Returns None.
+    Function to create a new customer and append to database. Returns True if successful.
     """
 
     first = helper.request_input('First name', 'alpha')
@@ -29,14 +29,16 @@ def newCustomer(conn):
  
     customer = Customer(first, last, address, ssn)
     print (str(customer))
+
     stmt = "INSERT INTO Customer VALUES (%s, %s, %s, %s)"
     val = (customer.ssn, customer.first, customer.last, customer.address)
     try:
         #attempt to add record to Customer table
-        result = conn.execute(stmt, val)
-        print (result)
+        conn.execute(stmt, val)
+        print ('Registered successfully.\n')
+        return True
+
     except exc.SQLAlchemyError as e:
-        #terminate program and give reason for failure
         print (f"Failed due to: {e}")
 
 def loginCustomer():
@@ -56,20 +58,19 @@ if __name__ == "__main__":
 
         usr_input = input(startMenu())
 
-        while True:
+        while usr_input != '4':
+
             if usr_input == '1':
-                print ('Run newCustomer module, pass in conn to add entry once complete')
                 newCustomer(conn)
                 break
+
             elif usr_input == '2':
                 print ('Do something with loginCustomer()')
                 break
             elif usr_input == '3':
                 print ('Do something with employee')
                 break
-            elif usr_input == '4':
-                break
             else:
                 usr_input = input('Please enter a valid input: ')
         
-        print ('System log off.')
+        print ('System connection terminated...')
