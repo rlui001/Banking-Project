@@ -49,9 +49,61 @@ class Customer:
     def ssn (self):
         return self._ssn
     
-    def customer_menu (self):
+    def customer_menu (self, conn):
         '''Prints the customer menu and loops until exception or user signs out.'''
-        print ('customer menu stuff here')
+        menu = """
+        Please select an option:  
+        1. Update first name
+        2. Update last name
+        3. Update address
+        4. Check existing accounts
+        5. Create a savings account
+        6. Request a service
+        7. Request account termination
+        8. Quit
+        """
+        customer_updated = False
+
+        while True:
+            usr_input = input(f'[Connected - {self._first}]: ')
+
+            if usr_input == '1':
+                customer_updated = True
+                pass
+            elif usr_input == '2':
+                pass
+            elif usr_input == '3':
+                pass
+            elif usr_input == '4':
+                pass
+            elif usr_input == '5':
+                pass
+            elif usr_input == '6':
+                pass
+            elif usr_input == '7':
+                pass
+            elif usr_input == '8':
+                if customer_updated:
+                    print(str(self))
+                    usr_input = input('Personal info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: \n')
+                    if usr_input.lower() != 'n':
+                        stmt = 'UPDATE Customer SET first_name = %s, last_name = %s, home_address = %s WHERE ssn = %s'
+                        val = (self._first, self._last, self._address, self._ssn)
+                        try:
+                            result = conn.execute(stmt, val)
+                            if result.rowcount:
+                                print ('Updated successfully.')
+                        except:
+                            print ('Update failed.\n')
+                    else:
+                        print ('Changes discarded.')
+                print ('Thank you for using Lui Bank.\n')
+                return
+            else:
+                print ('Invalid input. Please try again.\n')
+            
+
+
 
 
     

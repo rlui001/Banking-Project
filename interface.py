@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, exc, insert
+from sqlalchemy import create_engine, exc
 from Customer import Customer
 import sys
 import helper
@@ -48,6 +48,7 @@ def loginCustomer(conn):
 
     ssn = input('Please enter your SSN to login: ')
     stmt = "SELECT * FROM Customer WHERE ssn = %s"
+
     try:
         result = conn.execute(stmt, ssn).first()
         if not result:
@@ -57,7 +58,6 @@ def loginCustomer(conn):
     except exc.SQLAlchemyError as e:
         print (e)
 
-    pass
 
 
 
@@ -70,7 +70,7 @@ if __name__ == "__main__":
 
         usr_input = input(startMenu())
 
-        while usr_input != '4':
+        while True:
 
             if usr_input == '1':
                 # New customer record created in database
@@ -81,10 +81,13 @@ if __name__ == "__main__":
                 # Customer successfully logins and is able to access customer menu
                 customer = loginCustomer(conn)
                 print (f'Welcome back to LuiBank, {customer.first}')
-                customer.customer_menu()
+                customer.customer_menu(conn)
                 break
             elif usr_input == '3':
                 print ('Do something with employee')
+                break
+            elif usr_input == '4':
+                print ('Thank you for using Lui Bank.\n')
                 break
             else:
                 usr_input = input('Please enter a valid input: ')
