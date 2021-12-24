@@ -49,6 +49,10 @@ class Customer:
     def ssn (self):
         return self._ssn
     
+    def customer_menu (self):
+        '''Prints the customer menu and loops until exception or user signs out.'''
+        print ('customer menu stuff here')
+
 
     
 

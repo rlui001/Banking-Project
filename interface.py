@@ -79,11 +79,9 @@ if __name__ == "__main__":
 
             elif usr_input == '2':
                 # Customer successfully logins and is able to access customer menu
-                print ('Do something with loginCustomer()')
                 customer = loginCustomer(conn)
-                print (f'Welcome back to LuiBank, {customer.first}./n')
-
-                print ('Build customer menu')
+                print (f'Welcome back to LuiBank, {customer.first}')
+                customer.customer_menu()
                 break
             elif usr_input == '3':
                 print ('Do something with employee')
