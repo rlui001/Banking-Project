@@ -1,3 +1,4 @@
+from sqlalchemy import create_engine
 import sys
 
 def startMenu ():
@@ -31,9 +32,12 @@ def loginCustomer():
 
 if __name__ == "__main__":
     #db connection should be set up here
+    engine = create_engine('mysql+pymysql://root:password@127.0.0.1/LuiBank')
+    print(engine.table_names())
+
 
     usr_input = input(startMenu())
-    
+
     while True:
         if usr_input == '1':
             print ('Do something with newCustomer()')
