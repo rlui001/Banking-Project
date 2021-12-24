@@ -6,3 +6,9 @@ DROP TABLE IF EXISTS Account CASCADE;
 DROP TABLE IF EXISTS Employee CASCADE;
 DROP TABLE IF EXISTS Services CASCADE;
 
+CREATE TABLE Customer (
+    ssn int UNIQUE NOT NULL,
+    first_name char(50) NOT NULL,
+    last_name char(50) NOT NULL,
+    home_address char(150) NOT NULL,
+    PRIMARY KEY(ssn));

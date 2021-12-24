@@ -1,5 +1,6 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, exc
 import sys
+import helper
 
 def startMenu ():
     """
@@ -18,6 +19,10 @@ def newCustomer():
     """
     Function to create a new customer and append to database. Returns None.
     """
+    first = helper.request_input('First name', 'alpha')
+    last = helper.request_input('Last name', 'alpha')
+
+
     pass
 
 def loginCustomer():
@@ -31,16 +36,16 @@ def loginCustomer():
 
 
 if __name__ == "__main__":
-    #db connection should be set up here
+ 
     engine = create_engine('mysql+pymysql://root:password@127.0.0.1/LuiBank')
-    print(engine.table_names())
-
+    conn = engine.connect()
 
     usr_input = input(startMenu())
 
     while True:
         if usr_input == '1':
-            print ('Do something with newCustomer()')
+            print ('Run newCustomer module, pass in conn to add entry once complete')
+            newCustomer(conn)
             break
         elif usr_input == '2':
             print ('Do something with loginCustomer()')
