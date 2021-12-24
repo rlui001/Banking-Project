@@ -1,11 +1,11 @@
 def request_input(req, type):
     """
     Helper function to request input from user and return valid input.
-    req: string, field being requested
+    req: string, input being requested
     type: string, input type expected
     """
     user_input = input(f'Please enter your {req}: ')
-    types = {'alpha': user_input.isalpha(), 'numeric': user_input.isnumeric}
+    types = {'alpha': user_input.isalpha(), 'numeric': user_input.isnumeric, 'alphanumeric': True}
 
     #based on the type, will call function from dictionary to determine if criteria is met
     while not types[type]:
