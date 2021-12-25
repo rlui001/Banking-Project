@@ -3,6 +3,11 @@ import helper
 class Account:
     
     def __init__ (self, id, balance=0, terminate=False):
+        """
+        id: customer ssn
+        balance: defaults to 0, should be integer
+        terminate: defaults to False, can be set to True by customer
+        """
         self._id = id
         if balance < 0:
             raise ValueError('Balance cannot be negative')
@@ -91,8 +96,13 @@ class Account:
 
 class CheckingAccount(Account):
 
-    def __init__ (self, id, balance, rate, terminate):
-        """Used when loading result from DB."""
+    def __init__ (self, id, balance=0, rate=0.0, terminate=False):
+        """
+        id: customer ssn
+        balance: defaults to 0, should be integer type
+        rate: defaults to 0.0, should be float type
+        terminate: defaults to False, can be set to True by customer
+        """
         super(CheckingAccount, self).__init__(id, balance, terminate)
         self._rate = rate
         self._account_type = 'Checking'
@@ -111,8 +121,13 @@ class CheckingAccount(Account):
 
 class SavingsAccount(Account):
 
-    def __init__ (self, id, balance, rate, terminate):
-        """Used when loading result from DB."""
+    def __init__ (self, id, balance=0, rate=0.05, terminate=False):
+        """
+        id: customer ssn
+        balance: defaults to 0, should be integer type
+        rate: defaults to 0.0, should be float type
+        terminate: defaults to False, can be set to True by customer
+        """
         super(SavingsAccount, self).__init__(id, balance, terminate)
         self._rate = rate
         self._account_type = 'Savings'
