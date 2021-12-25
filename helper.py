@@ -2,6 +2,7 @@ from sqlalchemy import create_engine, exc
 from Account import *
 from Customer import Customer
 from MyService import Services
+from Employee import Employee
 
 def request_input(req, type):
     """
@@ -42,6 +43,11 @@ def update_db (usr_input, obj, conn):
             # Build stmt and val for Services record update
             stmt = 'UPDATE Services SET balance = %s, service_status = %s WHERE serviceid = %s'
             val = (obj._balance, obj._status, obj._id)
+
+        elif isinstance(obj, Employee):
+            # Build stmt and val for Employeee record update
+            stmt = 'UPDATE Employee SET first_name = %s, last_name = %s WHERE ssn = %s'
+            val = (obj._first, obj._last, obj._ssn)
         else:
             raise TypeError('This class object does not exist.')
 

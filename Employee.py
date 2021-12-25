@@ -1,3 +1,5 @@
+import helper
+
 class Employee:
     MIN_SALARY = 60000
     def __init__ (self, ssn, first, last, salary):
@@ -51,14 +53,62 @@ class Employee:
         Employee menu.
         conn: connection to DB
         """
-        pass
+        menu = """
+        Please select an option:  
+        1. Update first name
+        2. Update last name
+        3. Accounts
+        4. Services
+        5. Accounts - Terminate all requested
+        6. Quit
+        """
+        employee_updated = False
+        print (menu)
+
+        while True:
+            usr_input = input(f'[Connected - {self._first}]: ')
+            if usr_input == '1':
+                self._first = helper.request_input('First name', 'alpha')
+                print ('First name updated.\n')
+                employee_updated = True
+                
+            elif usr_input == '2':
+                self._last = helper.request_input('Last name', 'alpha')
+                print ('Last name updated.\n')
+                employee_updated = True
+
+            elif usr_input == '3':
+                pass
+
+            elif usr_input == '4':
+                pass
+
+            elif usr_input == '5':
+                pass
+
+            elif usr_input == '6':
+                if employee_updated:
+                    print(self)
+                    usr_input = input('Employee info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: \n')
+                    helper.update_db(usr_input, self, conn)
+                print ('Thank you for being a Lui Bank employee.\n')
+                return
+            else:
+                print ('Invalid input. Please try again.\n')
+            
+            print (menu)
+        
 
     def terminate_confirm(self, conn):
         """
         View all accounts marked for termination and approve deletion.
         conn: connection to DB
         """
-        pass
+        #run query to select all accounts marked for termination
+
+        #take employee input to select a valid account marked for termination
+
+        return
 
     def update_account(self, conn):
         """
