@@ -41,4 +41,18 @@ class Services:
     def type(self):
         return self._type
 
+    def customer_services_menu(self, conn):
+        """
+        Customer services menu to request/view/update a service.
+        conn: connection to DB
+        """
+        pass
+
+    def employee_services_menu(self, conn):
+        """
+        Employee services menu to view/update a service.
+        conn: connection to DB
+        """
+        pass
+
     

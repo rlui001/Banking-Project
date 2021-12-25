@@ -2,6 +2,7 @@ import enum
 from typing import Type
 import helper
 from Account import CheckingAccount, SavingsAccount
+from Services import Service
 
 class Customer:
 
@@ -89,7 +90,7 @@ class Customer:
             elif usr_input == '4':
                 # sql pull from database to grab existing accounts
                 stmt = "SELECT * FROM Account WHERE cid = %s"
-                result = conn.execute(stmt, self._ssn).fetchall()
+                result = helper.execute_db(stmt, self._ssn, conn, 'fetchall')
                 print (['Selection: ' + str(i) + ' - ' + row['account_type'] for i, row in enumerate(result)])
 
                 # user selects which account to access 
@@ -131,7 +132,34 @@ class Customer:
                     print ('Savings account created successfully.')
 
             elif usr_input == '6':
-                # request/view services
+                # pull from Services table where cid = user ssn
+                stmt = "SELECT * FROM Services WHERE cid = %s"
+                result = helper.execute_db(stmt, self._ssn, conn, 'fetchall')
+                if result:
+                    print (['Selection: ' + str(i) + ' - ' + row['service_type'] + ' - ' + row['service_status'] for i, row in enumerate(result)])
+
+                    # user selects which account to access 
+                    usr_input = helper.request_input('Selection #', 'numeric')
+
+                    # load into Services object
+                    try:
+                        serviceid = result[int(usr_input)][0]
+                        service_type = result[int(usr_input)][2]
+                        service_status = result[int(usr_input)][3]
+                        rate = result[int(usr_input)][4]
+
+                        #service = Services -todo
+                        if account_type == 'Checking':
+                            account = CheckingAccount(accountid, balance, rate, terminate)
+                        elif account_type == 'Savings':
+                            account = SavingsAccount(accountid, balance, rate, terminate)
+                        print (account)
+                        # access service menu
+                        # service.customer_service_menu(conn)
+                    except Exception as e:
+                        print (e)
+                else:
+                    print ('Nothing')
                 # pick service type
                 # pick amount request
                 # submit to db which needs to be approved

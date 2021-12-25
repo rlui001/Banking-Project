@@ -30,7 +30,7 @@ CREATE TABLE Services (
     cid int NOT NULL,
     service_type char(50) NOT NULL,
     service_status char(50) NOT NULL,
-    ratee float NOT NULL,
+    rate float NOT NULL,
     PRIMARY KEY(serviceid),
     FOREIGN KEY(cid) REFERENCES Customer(ssn));
 
