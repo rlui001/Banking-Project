@@ -8,6 +8,8 @@ TO-DO:
     -Add Services class
     -Add Employee class
     -Update UML Diagram to reflect new design changes
+    -Customer
+        -Add functionality to accept an updated service marked Pending
 
 
 Known issues:

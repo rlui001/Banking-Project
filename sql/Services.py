@@ -3,7 +3,7 @@ class Services:
         """
         id: customer ssn
         type: service type being requested
-        status: defaults to Initiated
+        status: defaults to Initiated. Employee sets to Pending once rate is given, or Rejected if declined.
         rate: defaults to 0, to be updated by employee
         """
         self._id = id

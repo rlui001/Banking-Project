@@ -108,6 +108,7 @@ class Customer:
                     elif account_type == 'Savings':
                         account = SavingsAccount(accountid, balance, rate, terminate)
                     print (str(account))
+                    # access account menu
                     account.account_menu(conn)
                 except Exception as e:
                     print (e)
