@@ -1,11 +1,9 @@
 Initial commit
 
 TO-DO:
-    -Complete request/view services for existing customer
-    -Add Services table in .sql file
     -Add Employee table in .sql file
         -Add some insert records for employee
-    -Add Services class
+    -Add Services menu functions
     -Add Employee class
     -Update UML Diagram to reflect new design changes
     -Customer

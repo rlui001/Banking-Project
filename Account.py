@@ -85,11 +85,13 @@ class Account:
 
             elif usr_input == '5':
                 if account_updated:
-                    print(str(self))
+                    print(self)
                     usr_input = input('Account info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: \n')
                     helper.update_db(usr_input, self, conn)
                 print ('Logging off of account.\n')
                 return
+            else:
+                print ('Invalid input. Please try again.\n')
 
             print (menu)
 

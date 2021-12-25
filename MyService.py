@@ -1,3 +1,5 @@
+import helper
+
 class Services:
     def __init__(self, id, type, balance, status='Initiated', rate=0.0):
         """
@@ -15,7 +17,7 @@ class Services:
         self._rate = rate
 
     def __str__ (self):
-        return f'\Service ID: {self._id}\nService Type: {self._type}\nBalance: {self._balance}\nService Status: {self._status} \nService Rate: {self._rate}\n'
+        return f'\nService ID: {self._id}\nService Type: {self._type}\nBalance: {self._balance}\nService Status: {self._status} \nService Rate: {self._rate}\n'
 
     @property
     def id(self):
@@ -35,12 +37,17 @@ class Services:
         
     @status.setter
     def status(self, input):
+        """
+        input: initiated, rejected, pending, accepted are the only acceptable statuses
+        """
         if input.lower() == 'rejected':
             self._status = 'Rejected'
         elif input.lower() == 'pending':
             self._status = 'Pending'
         elif input.lower() == 'accepted':
             self._status = 'Accepted'
+        elif input.lower() == 'initiated':
+            self._status = 'Initiated'
         else:
             raise ValueError('Invalid status type for this service.\n')
 
@@ -65,13 +72,49 @@ class Services:
         1. Accept service terms
         2. Reject service terms
         3. Update request amount
-        4. Access accounts
-        5. Create a savings account
-        6. Services
-        7. Quit
+        4. Quit
         """
+        if self._status == 'Accepted':
+            print ('This service has already been accepted. You can only view the terms:\n')
+            print (self)
+            input('Enter any key to return back to customer menu...\n')
+            return
 
-        pass
+        service_updated = False
+        print (menu)
+        while True:
+            usr_input = input(f'[Connected - Service ID {self._id}]: ')
+
+            if usr_input == '1':
+                self._status = 'Accepted'
+                print (f'Status set to {self._status}. Status will be updated during log off.')
+                service_updated = True
+
+            elif usr_input == '2':
+                self._status = 'Rejected'
+                print (f'Status set to {self._status}. Status will be updated during log off.')
+                service_updated = True
+
+            elif usr_input == '3':
+                balance = helper.request_input('new request amount', 'numeric')
+                self._balance = int(balance)
+                self._status = 'Initiated'
+                print (f'Request amount set to {self._balance}. Balance will be updated during log off.')
+                service_updated = True
+
+            elif usr_input == '4':
+                if service_updated:
+                    print(self)
+                    usr_input = input('Service info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: \n')
+                    helper.update_db(usr_input, self, conn)
+                print ('Logging off of service.\n')
+                return
+            else:
+                print ('Invalid input. Please try again.\n')
+
+            print (menu)
+
+
 
     def employee_services_menu(self, conn):
         """

@@ -1,6 +1,8 @@
 from sqlalchemy import create_engine, exc
 from Account import *
 from Customer import Customer
+from MyService import Services
+
 def request_input(req, type):
     """
     Helper function to request input from user and return valid input.
@@ -35,6 +37,11 @@ def update_db (usr_input, obj, conn):
             # Build stmt and val for Customer record update
             stmt = 'UPDATE Customer SET first_name = %s, last_name = %s, home_address = %s WHERE ssn = %s'
             val = (obj._first, obj._last, obj._address, obj._ssn)
+
+        elif isinstance(obj, Services):
+            # Build stmt and val for Services record update
+            stmt = 'UPDATE Services SET balance = %s, service_status = %s WHERE serviceid = %s'
+            val = (obj._balance, obj._status, obj._id)
         else:
             raise TypeError('This class object does not exist.')
 
