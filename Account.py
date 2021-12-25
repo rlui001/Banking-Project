@@ -57,3 +57,22 @@ class CheckingAccount(Account):
     def account_type(self):
         return self._account_type
 
+
+class SavingsAccount(Account):
+
+    def __init__ (self, id):
+        super(SavingsAccount, self).__init__(id)
+        self._rate = 0.05
+        self._account_type = 'Savings'
+
+    def __str__ (self):
+        return f'\nAccount Type: {self._account_type}\nBalance: {self._balance}\nRate: {self._rate}\nTermination Status: {self._terminate}\n'
+
+    @property
+    def rate(self):
+        return self._rate
+    
+    @property
+    def account_type(self):
+        return self._account_type
+
