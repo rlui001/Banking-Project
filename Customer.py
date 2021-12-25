@@ -108,8 +108,9 @@ class Customer:
                     elif account_type == 'Savings':
                         account = SavingsAccount(self._ssn)
                     print (str(account))
-                except:
-                    print ('Account not found.')
+                    account.account_menu(conn)
+                except Exception as e:
+                    print (e)
 
                 # allow modification of account object, including termination
                 # push changes to db
