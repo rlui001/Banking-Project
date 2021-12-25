@@ -99,11 +99,11 @@ class Customer:
                     account_type = result[int(usr_input)][4]
                     if account_type == 'Checking':
                         account = CheckingAccount(self._ssn)
-                        print (account)
+                        print (str(account))
                     elif account_type == 'Savings':
                         pass
                 except:
-                    raise ValueError('Account not found.')
+                    print ('Account not found.')
 
                 # allow modification of account object, including termination
                 # push changes to db

@@ -8,6 +8,9 @@ class Account:
         self._balance = balance
         self._terminate = False
 
+    def __str__ (self):
+        return f'\nBalance: {self._balance} \nTermination Status: {self._terminate}\n'
+
     @property
     def id(self):
         return self._id
@@ -42,6 +45,9 @@ class CheckingAccount(Account):
         super(CheckingAccount, self).__init__(id)
         self._rate = 0
         self._account_type = 'Checking'
+
+    def __str__ (self):
+        return f'\nAccount Type: {self._account_type}\nBalance: {self._balance}\nRate: {self._rate}\nTermination Status: {self._terminate}\n'
 
     @property
     def rate(self):
