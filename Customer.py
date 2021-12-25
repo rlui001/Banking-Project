@@ -90,6 +90,7 @@ class Customer:
                 result = conn.execute(stmt, self._ssn)
                 print ([row for row in result])
                 # user selects which account to access 
+                usr_input = helper.request_input('Account to access', 'numeric')
                 # load into account object
                 # allow modification of account object, including termination
                 # push changes to db
