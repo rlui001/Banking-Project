@@ -107,7 +107,7 @@ class Customer:
                         account = CheckingAccount(accountid, balance, rate, terminate)
                     elif account_type == 'Savings':
                         account = SavingsAccount(accountid, balance, rate, terminate)
-                    print (str(account))
+                    print (account)
                     # access account menu
                     account.account_menu(conn)
                 except Exception as e:
@@ -137,7 +137,7 @@ class Customer:
                 pass
             elif usr_input == '7':
                 if customer_updated:
-                    print(str(self))
+                    print(self)
                     usr_input = input('Personal info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: \n')
                     helper.update_db(usr_input, self, conn)
                 print ('Thank you for using Lui Bank.\n')

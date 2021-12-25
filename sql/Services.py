@@ -10,3 +10,35 @@ class Services:
         self._type = type
         self._status = status
         self._rate = rate
+
+    @property
+    def status(self):
+        return self._status
+        
+    @status.setter
+    def status(self, input):
+        if input.lower() == 'rejected':
+            self._status = 'Rejected'
+        elif input.lower() == 'pending':
+            self._status = 'Pending'
+        elif input.lower() == 'accepted':
+            self._status = 'Accepted'
+        else:
+            raise ValueError('Invalid status type for this service.\n')
+
+    @property
+    def rate(self):
+        return self._rate
+
+    @rate.setter
+    def rate(self, rate):
+        try:
+            self.rate = float(rate)
+        except TypeError:
+            raise TypeError('Invalid type for rate.\n')
+
+    @property
+    def type(self):
+        return self._type
+
+    
