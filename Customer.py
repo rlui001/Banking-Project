@@ -124,8 +124,9 @@ class Customer:
                     print ('Sorry, you already have a Savings account.\n')
                 # else create account
                 else:
+                    account = SavingsAccount(self._ssn)
                     stmt = "INSERT INTO Account (cid, balance, rate, account_type, terminate) VALUES (%s, %s, %s, %s, %s)"
-                    val = (self._ssn, 0, 0.05, 'Savings', False)
+                    val = (account.id, account.balance, account.rate, account.account_type, account.terminate)
                     helper.execute_db(stmt, val, conn)
                     print ('Savings account created successfully.')
 
