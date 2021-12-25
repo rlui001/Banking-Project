@@ -38,8 +38,8 @@ class Account:
 
 class CheckingAccount(Account):
 
-    def __init__ (self):
-        super().__init__()
+    def __init__ (self, id):
+        super(CheckingAccount, self).__init__(id)
         self._rate = 0
         self._account_type = 'Checking'
 

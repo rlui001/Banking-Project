@@ -1,4 +1,6 @@
+import enum
 import helper
+from Account import CheckingAccount
 
 class Customer:
 
@@ -64,9 +66,8 @@ class Customer:
         7. Quit
         """
         customer_updated = False
-
+        print (menu)
         while True:
-            print (menu)
             usr_input = input(f'[Connected - {self._first}]: ')
 
             if usr_input == '1':
@@ -87,11 +88,23 @@ class Customer:
             elif usr_input == '4':
                 # sql pull from database to grab existing accounts
                 stmt = "SELECT * FROM Account WHERE cid = %s"
-                result = conn.execute(stmt, self._ssn)
-                print ([row for row in result])
+                result = conn.execute(stmt, self._ssn).fetchall()
+                print (['Selection: ' + str(i) + ' - ' + row['account_type'] for i, row in enumerate(result)])
+
                 # user selects which account to access 
-                usr_input = helper.request_input('Account to access', 'numeric')
+                usr_input = helper.request_input('Selection #', 'numeric')
+
                 # load into account object
+                try:
+                    account_type = result[int(usr_input)][4]
+                    if account_type == 'Checking':
+                        account = CheckingAccount(self._ssn)
+                        print (account)
+                    elif account_type == 'Savings':
+                        pass
+                except:
+                    raise ValueError('Account not found.')
+
                 # allow modification of account object, including termination
                 # push changes to db
                 pass
@@ -125,6 +138,7 @@ class Customer:
                 return
             else:
                 print ('Invalid input. Please try again.\n')
+            print (menu)
             
 
 
