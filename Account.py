@@ -4,7 +4,7 @@ class Account:
     
     def __init__ (self, id, balance=0, terminate=False):
         """
-        id: customer ssn
+        id: customer ssn/account id
         balance: defaults to 0, should be integer
         terminate: defaults to False, can be set to True by customer
         """
@@ -102,7 +102,7 @@ class CheckingAccount(Account):
 
     def __init__ (self, id, balance=0, rate=0.0, terminate=False):
         """
-        id: customer ssn
+        id: customer ssn/account id
         balance: defaults to 0, should be integer type
         rate: defaults to 0.0, should be float type
         terminate: defaults to False, can be set to True by customer
@@ -127,7 +127,7 @@ class SavingsAccount(Account):
 
     def __init__ (self, id, balance=0, rate=0.05, terminate=False):
         """
-        id: customer ssn
+        id: customer ssn/account id
         balance: defaults to 0, should be integer type
         rate: defaults to 0.0, should be float type
         terminate: defaults to False, can be set to True by customer

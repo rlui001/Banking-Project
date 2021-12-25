@@ -1,7 +1,7 @@
 class Services:
     def __init__(self, id, type, balance, status='Initiated', rate=0.0):
         """
-        id: customer ssn
+        id: customer ssn/account id
         type: service type being requested
         status: defaults to Initiated. Employee sets to Pending once rate is given, or Rejected if declined.
         rate: defaults to 0.0, to be updated by employee
@@ -16,6 +16,18 @@ class Services:
 
     def __str__ (self):
         return f'\Service ID: {self._id}\nService Type: {self._type}\nBalance: {self._balance}\nService Status: {self._status} \nService Rate: {self._rate}\n'
+
+    @property
+    def id(self):
+        return self._id
+
+    @property
+    def balance(self):
+        return self._balance
+
+    @property
+    def type(self):
+        return self._type
 
     @property
     def status(self):
@@ -42,10 +54,6 @@ class Services:
             self.rate = float(rate)
         except TypeError:
             raise TypeError('Invalid type for rate.\n')
-
-    @property
-    def type(self):
-        return self._type
 
     def customer_services_menu(self, conn):
         """

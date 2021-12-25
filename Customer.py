@@ -161,14 +161,18 @@ class Customer:
                     else:
                         print ('You currently have no services.\n')
                 elif usr_input == 'request':
-                    #create service
-                    pass
+                    service_type = helper.request_input('Service type', 'alpha')
+                    balance = int(helper.request_input('request amount', 'numeric'))
+                    service = Services(self._ssn, service_type, balance)
+
+                    stmt = "INSERT INTO Services (cid, balance, service_type, service_status, rate) VALUES (%s, %s, %s, %s, %s)"
+                    val = (service.id, service.balance, service.type, service.status, service.rate)
+                    helper.execute_db(stmt, val, conn)
+
+                    print ('Service requested successfully.')
                 else:
                     print ('Please enter a valid choice.\n')
-                # pick service type
-                # pick amount request
-                # submit to db which needs to be approved
-                pass
+
             elif usr_input == '7':
                 if customer_updated:
                     print(self)
