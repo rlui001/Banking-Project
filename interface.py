@@ -1,3 +1,4 @@
+from sqlalchemy.sql.type_api import UserDefinedType
 from helper import *
 import sys
 
@@ -43,18 +44,26 @@ def newCustomer(conn):
     print ('Registered successfully. A checking account has also been created automatically.\n')
     return True
 
-def loginCustomer(conn):
+def login(conn, user_type):
     """
-    Function to retrieve customer data from database and return a Customer object.
+    Function to retrieve user data from database and return an Employee object.
+    conn: connection to DB
+    user_type: String, type of user
     """
-
     ssn = input('Please enter your SSN to login: ')
-    stmt = "SELECT * FROM Customer WHERE ssn = %s"
+    stmt = "SELECT * FROM " + user_type + " WHERE ssn = %s"
 
     result = execute_db(stmt, ssn, conn, 'first')
     if not result:
         raise ValueError("No customer with that SSN found.")
-    return Customer(str(result[0]), result[1], result[2], result[3])
+
+    if user_type == 'Employee':
+        return Employee(str(result[0]), result[1], result[2], result[3])
+
+    elif user_type == 'Customer':
+        return Customer(str(result[0]), result[1], result[2], result[3])
+
+
 
 
 
@@ -75,12 +84,14 @@ if __name__ == "__main__":
 
             elif usr_input == '2':
                 # Customer successfully logins and is able to access customer menu
-                customer = loginCustomer(conn)
+                customer = login(conn, 'Customer')
                 print (f'Welcome back to LuiBank, {customer.first}')
                 customer.customer_menu(conn)
                 break
             elif usr_input == '3':
-                print ('Do something with employee')
+                employee = login(conn, 'Employee')
+                print (f'Welcome back to LuiBank, {employee.first}')
+                employee.employee_menu(conn)
                 break
             elif usr_input == '4':
                 print ('Thank you for using Lui Bank.\n')
