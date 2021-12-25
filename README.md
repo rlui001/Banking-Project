@@ -1,13 +1,9 @@
 Initial commit
 
 TO-DO:
-    -Add Employee table in .sql file
-        -Add some insert records for employee
     -Add Services menu functions
     -Add Employee class
     -Update UML Diagram to reflect new design changes
-    -Customer
-        -Add functionality to accept an updated service marked Pending
 
 
 Known issues:

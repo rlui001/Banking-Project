@@ -35,3 +35,12 @@ CREATE TABLE Services (
     PRIMARY KEY(serviceid),
     FOREIGN KEY(cid) REFERENCES Customer(ssn));
 
+CREATE TABLE Employee (
+    ssn int UNIQUE NOT NULL,
+    first_name char(50) NOT NULL,
+    last_name char(50) NOT NULL,
+    salary int NOT NULL,
+    PRIMARY KEY(ssn));
+
+INSERT INTO Employee VALUES (999999999, 'root', 'admin', 999999);
+
