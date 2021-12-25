@@ -11,6 +11,9 @@ class Services:
         self._status = status
         self._rate = rate
 
+    def __str__ (self):
+        return f'\Service ID: {self._id}\nService Type: {self._type} \nService Status: {self._status} \nService Rate: {self._rate}\n'
+
     @property
     def status(self):
         return self._status
