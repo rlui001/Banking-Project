@@ -78,12 +78,23 @@ class Employee:
                 employee_updated = True
 
             elif usr_input == '3':
+                #show all accounts
+                #take user input to select account
+                #call account.employee_menu() - build this functioon in Account class
                 pass
 
             elif usr_input == '4':
+                #show all services
+                #take user input to select service
+                #call service.employee_menu() - build this function in Service class
                 pass
 
             elif usr_input == '5':
+                #show all accounts marked for termination
+
+                #ask for confirmation
+
+                #delete all records marked for termination from DB
                 pass
 
             elif usr_input == '6':
@@ -97,28 +108,3 @@ class Employee:
                 print ('Invalid input. Please try again.\n')
             
             print (menu)
-        
-
-    def terminate_confirm(self, conn):
-        """
-        View all accounts marked for termination and approve deletion.
-        conn: connection to DB
-        """
-        #run query to select all accounts marked for termination
-
-        #take employee input to select a valid account marked for termination
-
-        return
-
-    def update_account(self, conn):
-        """
-        Employee can pull account records and update information.
-        conn: connection to DB
-        """
-        pass
-
-    def update_service(self, conn):
-        """
-        Employee can pull service records and update information.
-        conn: connection to DB
-        """

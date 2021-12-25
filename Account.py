@@ -124,6 +124,9 @@ class CheckingAccount(Account):
     def account_type(self):
         return self._account_type
 
+    def employee_account_menu(self, conn):
+        pass
+
 
 class SavingsAccount(Account):
 
@@ -148,4 +151,7 @@ class SavingsAccount(Account):
     @property
     def account_type(self):
         return self._account_type
+
+    def employee_account_menu(self, conn):
+        pass
 
