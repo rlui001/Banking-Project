@@ -106,7 +106,7 @@ class Customer:
                     if account_type == 'Checking':
                         account = CheckingAccount(accountid, balance, rate, terminate)
                     elif account_type == 'Savings':
-                        account = SavingsAccount(self._ssn)
+                        account = SavingsAccount(accountid, balance, rate, terminate)
                     print (str(account))
                     account.account_menu(conn)
                 except Exception as e:
@@ -117,12 +117,16 @@ class Customer:
                 stmt = "SELECT * FROM Account WHERE cid = %s AND account_type = %s"
                 val = (self._ssn, 'Savings')
                 result = helper.execute_db(stmt, val, conn, 'first')
+
                 # if result is true then deny request
                 if result:
                     print ('Sorry, you already have a Savings account.\n')
                 # else create account
                 else:
-                    print ('Create savings account')
+                    stmt = "INSERT INTO Account (cid, balance, rate, account_type, terminate) VALUES (%s, %s, %s, %s, %s)"
+                    val = (self._ssn, 0, 0.05, 'Savings', False)
+                    helper.execute_db(stmt, val, conn)
+                    print ('Savings account created successfully.')
 
             elif usr_input == '6':
                 # request/view services
