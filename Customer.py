@@ -130,17 +130,7 @@ class Customer:
                 if customer_updated:
                     print(str(self))
                     usr_input = input('Personal info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: \n')
-                    if usr_input.lower() != 'n':
-                        stmt = 'UPDATE Customer SET first_name = %s, last_name = %s, home_address = %s WHERE ssn = %s'
-                        val = (self._first, self._last, self._address, self._ssn)
-                        try:
-                            result = conn.execute(stmt, val)
-                            if result.rowcount:
-                                print ('Updated successfully.')
-                        except:
-                            print ('Update failed.\n')
-                    else:
-                        print ('Changes discarded.')
+                    helper.update_db(usr_input, self, conn)
                 print ('Thank you for using Lui Bank.\n')
                 return
             else:

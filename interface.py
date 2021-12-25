@@ -1,6 +1,5 @@
 from sqlalchemy import create_engine, exc
-from Customer import Customer
-import helper
+from helper import *
 import sys
 
 
@@ -22,10 +21,10 @@ def newCustomer(conn):
     Function to create a new customer and append to database. Returns True if successful.
     """
 
-    first = helper.request_input('First name', 'alpha')
-    last = helper.request_input('Last name', 'alpha')
-    address = helper.request_input('Home Address', 'alphanumeric')
-    ssn = helper.request_input('Social Security Number', 'numeric')
+    first = request_input('First name', 'alpha')
+    last = request_input('Last name', 'alpha')
+    address = request_input('Home Address', 'alphanumeric')
+    ssn = request_input('Social Security Number', 'numeric')
  
     customer = Customer(ssn, first, last, address)
     print (str(customer))

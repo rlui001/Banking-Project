@@ -55,22 +55,30 @@ class Account:
         while True:
             usr_input = input(f'[Connected - Account ID: {self._id}]: ')
             if usr_input == '1':
-                print (f'Your current balance is: {self._balance}')
+                print (f'\nYour current balance is: {self._balance}')
 
             elif usr_input == '2':
                 deposit_amount = helper.request_input('deposit amount', 'numeric')
                 self.deposit(deposit_amount)
-                print (f'{deposit_amount} deposited. New balance is {self._balance}')
+                print (f'\n{deposit_amount} deposited. New balance is {self._balance}. Transaction is finalized when logging off.')
+                account_updated = True
 
             elif usr_input == '3':
                 withdraw_amount = helper.request_input('withdraw amount', 'numeric')
                 self.withdraw(withdraw_amount)
-                print (f'{withdraw_amount} withdrawn. New balance is {self._balance}')
+                print (f'\n{withdraw_amount} withdrawn. New balance is {self._balance}. Transaction is finalized when logging off.')
+                account_updated = True
 
             elif usr_input == '4':
                 self.terminate()
+                print ('Requested termination. Changes are finalized when logging off.')
+                account_updated = True
 
             elif usr_input == '5':
+                if account_updated:
+                    print(str(self))
+                    usr_input = input('Account info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: \n')
+                    helper.update_db(usr_input, self, conn)
                 print ('Logging off of account.\n')
                 return
 
