@@ -29,7 +29,6 @@ class Account:
     def terminate(self):
         return self._terminate
     
-    @terminate.setter
     def terminate(self):
         """Updates Account object terminate status to true."""
         self._terminate = True

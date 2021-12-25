@@ -76,17 +76,17 @@ class Customer:
                 self._first = helper.request_input('First name', 'alpha')
                 print ('First name updated.\n')
                 customer_updated = True
-                pass
+                
             elif usr_input == '2':
                 self._last = helper.request_input('Last name', 'alpha')
                 print ('Last name updated.\n')
                 customer_updated = True
-                pass
+                
             elif usr_input == '3':
                 self._address = helper.request_input('Home Address', 'alphanumeric')
                 print ('Address updated.\n')
                 customer_updated = True
-                pass
+                
             elif usr_input == '4':
                 # sql pull from database to grab existing accounts
                 stmt = "SELECT * FROM Account WHERE cid = %s"
