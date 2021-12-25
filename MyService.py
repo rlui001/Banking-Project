@@ -86,9 +86,12 @@ class Services:
             usr_input = input(f'[Connected - Service ID {self._id}]: ')
 
             if usr_input == '1':
-                self._status = 'Accepted'
-                print (f'Status set to {self._status}. Status will be updated during log off.')
-                service_updated = True
+                if self._status == 'Initiated':
+                    print ('You cannot accept this until it has been reviewed by an employee.\n')
+                else:
+                    self._status = 'Accepted'
+                    print (f'Status set to {self._status}. Status will be updated during log off.')
+                    service_updated = True
 
             elif usr_input == '2':
                 self._status = 'Rejected'
