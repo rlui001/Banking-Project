@@ -114,8 +114,9 @@ class Customer:
 
             elif usr_input == '5':
                 # pull from DB where account_type = 'Savings'
-                stmt = "SELECT * FROM Account WHERE cid = %s AND account_type = Savings"
-                result = conn.execute(stmt, self._ssn).first()
+                stmt = "SELECT * FROM Account WHERE cid = %s AND account_type = %s"
+                val = (self._ssn, 'Savings')
+                result = helper.execute_db(stmt, val, conn, 'first')
                 # if result is true then deny request
                 if result:
                     print ('Sorry, you already have a Savings account.\n')

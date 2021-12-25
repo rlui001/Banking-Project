@@ -1,3 +1,4 @@
+from sqlalchemy import create_engine, exc
 from Account import Account
 from Customer import Customer
 def request_input(req, type):
@@ -46,11 +47,28 @@ def update_db (usr_input, obj, conn):
     else:
         print ('Changes discarded')
 
-def select_db (stmt, val, conn):
+def execute_db (stmt, val, conn, op=''):
     """
     Function that will return results from DB.
     stmt: String, Raw SQL statement
     val: args being passed
     conn: connection to DB
+    op: first, fetchall, update
     """
-    pass
+    if op == 'first':
+        try:
+            result = conn.execute(stmt, val).first()
+        except exc.SQLAlchemyError as e:
+            raise Exception(f'Failed due to: {e}')
+    elif op == 'fetchall':
+        try:
+            result = conn.execute(stmt, val).fetchall()
+        except exc.SQLAlchemyError as e:
+            raise Exception(f'Failed due to: {e}')
+    else:
+        try:
+            result = conn.execute(stmt, val)
+        except exc.SQLAlchemyError as e:
+            raise Exception('Failed due to: {e}')
+
+    return result

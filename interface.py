@@ -1,4 +1,3 @@
-from sqlalchemy import create_engine, exc
 from helper import *
 import sys
 
@@ -56,7 +55,7 @@ def loginCustomer(conn):
     stmt = "SELECT * FROM Customer WHERE ssn = %s"
 
     try:
-        result = conn.execute(stmt, ssn)
+        result = conn.execute(stmt, ssn).first()
         if not result:
             raise ValueError("No customer with that SSN found.")
         return Customer(str(result[0]), result[1], result[2], result[3])
