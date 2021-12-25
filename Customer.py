@@ -112,14 +112,17 @@ class Customer:
                 except Exception as e:
                     print (e)
 
-                # allow modification of account object, including termination
-                # push changes to db
-                pass
             elif usr_input == '5':
-                # request input for savings account object
-                # create account object
-                # push insert to db
-                pass
+                # pull from DB where account_type = 'Savings'
+                stmt = "SELECT * FROM Account WHERE cid = %s AND account_type = Savings"
+                result = conn.execute(stmt, self._ssn).first()
+                # if result is true then deny request
+                if result:
+                    print ('Sorry, you already have a Savings account.\n')
+                # else create account
+                else:
+                    print ('Create savings account')
+
             elif usr_input == '6':
                 # request/view services
                 # pick service type

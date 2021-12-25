@@ -56,7 +56,7 @@ def loginCustomer(conn):
     stmt = "SELECT * FROM Customer WHERE ssn = %s"
 
     try:
-        result = conn.execute(stmt, ssn).first()
+        result = conn.execute(stmt, ssn)
         if not result:
             raise ValueError("No customer with that SSN found.")
         return Customer(str(result[0]), result[1], result[2], result[3])

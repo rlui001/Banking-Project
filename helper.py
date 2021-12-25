@@ -45,3 +45,12 @@ def update_db (usr_input, obj, conn):
             print ('Update failed.\n')
     else:
         print ('Changes discarded')
+
+def select_db (stmt, val, conn):
+    """
+    Function that will return results from DB.
+    stmt: String, Raw SQL statement
+    val: args being passed
+    conn: connection to DB
+    """
+    pass
