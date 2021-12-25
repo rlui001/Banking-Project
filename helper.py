@@ -37,13 +37,8 @@ def update_db (usr_input, obj, conn):
             val = (obj._first, obj._last, obj._address, obj._ssn)
         else:
             raise TypeError('This class object does not exist.')
-
-        try:
-            result = conn.execute(stmt, val)
-            if result.rowcount:
-                print ('Updated successfully.')
-        except:
-            print ('Update failed.\n')
+            
+        execute_db(stmt, val, conn)
     else:
         print ('Changes discarded')
 
@@ -68,6 +63,8 @@ def execute_db (stmt, val, conn, op=''):
     else:
         try:
             result = conn.execute(stmt, val)
+            if result.rowcount:
+                print ('Updated successfully.\n')
         except exc.SQLAlchemyError as e:
             raise Exception('Failed due to: {e}')
 
