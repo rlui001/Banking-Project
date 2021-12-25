@@ -60,6 +60,17 @@ class Services:
         Customer services menu to request/view/update a service.
         conn: connection to DB
         """
+        menu = """
+        Please select an option:  
+        1. Accept service terms
+        2. Reject service terms
+        3. Update request amount
+        4. Access accounts
+        5. Create a savings account
+        6. Services
+        7. Quit
+        """
+
         pass
 
     def employee_services_menu(self, conn):

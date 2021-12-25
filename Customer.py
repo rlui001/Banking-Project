@@ -134,9 +134,10 @@ class Customer:
             elif usr_input == '6':
                 usr_input = helper.request_input('selection (view/request)', 'alpha')
                 if usr_input == 'view':
-                    # pull from Services table where cid = user ssn
-                    stmt = "SELECT * FROM Services WHERE cid = %s"
-                    result = helper.execute_db(stmt, self._ssn, conn, 'fetchall')
+                    # pull from Services table where cid = user ssn and service_status != Rejected
+                    stmt = "SELECT * FROM Services WHERE cid = %s AND service_type <> %s"
+                    val = (self._ssn, 'Rejected')
+                    result = helper.execute_db(stmt, val, conn, 'fetchall')
                     if result:
                         print (['Selection: ' + str(i) + ' - ' + row['service_type'] + ' - ' + row['service_status'] for i, row in enumerate(result)])
 
