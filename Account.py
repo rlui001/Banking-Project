@@ -29,9 +29,10 @@ class Account:
     def terminate(self):
         return self._terminate
     
-    def terminate(self):
-        """Updates Account object terminate status to true."""
-        self._terminate = True
+    @terminate.setter
+    def terminate(self, val):
+        """Updates Account object terminate status."""
+        self._terminate = val
     
     def deposit(self, amount):
         try:
@@ -78,7 +79,7 @@ class Account:
                 account_updated = True
 
             elif usr_input == '4':
-                self.terminate()
+                self._terminate = True
                 print ('Requested termination. Changes are finalized when logging off.')
                 account_updated = True
 

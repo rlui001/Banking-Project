@@ -90,21 +90,7 @@ class Employee:
                 pass
 
             elif usr_input == '5':
-                #show all accounts marked for termination
-                stmt = "SELECT * FROM Account WHERE terminate = %s"
-                val = 1
-                result = helper.execute_db(stmt, val, conn, 'fetchall')
-                if result:
-                    print (['Selection: ' + str(i) + ' - ' + row['account_type'] + ' - ' + str(row['terminate']) for i, row in enumerate(result)])
-                #ask for confirmation
-                    if input('Please enter "confirm" to delete all accounts marked for termination: ') == 'confirm':
-                        stmt_del = "DELETE FROM Account WHERE terminate = %s"
-                        helper.execute_db(stmt_del, val, conn)
-                        print ('Accounts deleted.\n')
-                    else:
-                        print ('Accounts were not deleted.\n')
-                else:
-                    print ('There are currently no accounts marked for termination.\n')
+                self.terminate_accounts(conn)
 
             elif usr_input == '6':
                 if employee_updated:
@@ -117,3 +103,25 @@ class Employee:
                 print ('Invalid input. Please try again.\n')
             
             print (menu)
+
+    def terminate_accounts(self, conn):
+        """
+        Function to delete all accounts marked for termination.
+        conn: connection to DB
+        """
+        # show all accounts marked for termination
+        stmt = "SELECT * FROM Account WHERE terminate = %s"
+        val = 1
+        result = helper.execute_db(stmt, val, conn, 'fetchall')
+        # if there are results
+        if result:
+            print (['Selection: ' + str(i) + ' - ' + row['account_type'] + ' - ' + str(row['terminate']) for i, row in enumerate(result)])
+        # ask for confirmation
+            if input('Please enter "confirm" to delete all accounts marked for termination: ') == 'confirm':
+                stmt_del = "DELETE FROM Account WHERE terminate = %s"
+                helper.execute_db(stmt_del, val, conn)
+                print ('Accounts deleted.\n')
+            else:
+                print ('Accounts were not deleted.\n')
+        else:
+            print ('There are currently no accounts marked for termination.\n')
