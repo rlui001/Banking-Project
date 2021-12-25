@@ -24,6 +24,15 @@ class Account:
     @property
     def balance(self):
         return self._balance
+
+    @property
+    def terminate(self):
+        return self._terminate
+    
+    @terminate.setter
+    def terminate(self):
+        """Updates Account object terminate status to true."""
+        self._terminate = True
     
     def deposit(self, amount):
         try:
@@ -38,11 +47,6 @@ class Account:
         elif self._balance - int(amount) < 0:
             raise ValueError('Balance cannot be negative.')
         self._balance -= int(amount)
-
-    def terminate(self):
-        """Updates Account object terminate status to true."""
-        # set terminate status to True
-        self._terminate = True
 
     def account_menu(self, conn):
         """Function to call withdraw, deposit, view balance, request termination."""

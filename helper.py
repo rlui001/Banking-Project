@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine, exc
-from Account import Account
+from Account import *
 from Customer import Customer
 def request_input(req, type):
     """
@@ -37,7 +37,7 @@ def update_db (usr_input, obj, conn):
             val = (obj._first, obj._last, obj._address, obj._ssn)
         else:
             raise TypeError('This class object does not exist.')
-            
+
         execute_db(stmt, val, conn)
     else:
         print ('Changes discarded')
@@ -63,9 +63,7 @@ def execute_db (stmt, val, conn, op=''):
     else:
         try:
             result = conn.execute(stmt, val)
-            if result.rowcount:
-                print ('Updated successfully.\n')
         except exc.SQLAlchemyError as e:
-            raise Exception('Failed due to: {e}')
+            raise Exception(f'Failed due to: {e}')
 
     return result

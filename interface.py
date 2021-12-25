@@ -26,12 +26,13 @@ def newCustomer(conn):
     ssn = request_input('Social Security Number', 'numeric')
  
     customer = Customer(ssn, first, last, address)
-    print (str(customer))
+    print (customer)
+    account = CheckingAccount(ssn)
 
     stmt_c = "INSERT INTO Customer VALUES (%s, %s, %s, %s)"
     val_c = (customer.ssn, customer.first, customer.last, customer.address)
     stmt_a = "INSERT INTO Account (cid, balance, rate, account_type, terminate) VALUES (%s, %s, %s, %s, %s)"
-    val_a = (customer.ssn, 0, 0.0, 'Checking', False)
+    val_a = (customer.ssn, account.balance, account.rate, account.account_type, account.terminate)
 
     #attempt to add record to Customer table
     execute_db(stmt_c, val_c, conn)
