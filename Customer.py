@@ -132,7 +132,7 @@ class Customer:
                     print ('Savings account created successfully.')
 
             elif usr_input == '6':
-                usr_input = helper.request_input('selection (view/request): ', 'alpha')
+                usr_input = helper.request_input('selection (view/request)', 'alpha')
                 if usr_input == 'view':
                     # pull from Services table where cid = user ssn
                     stmt = "SELECT * FROM Services WHERE cid = %s"
@@ -146,11 +146,12 @@ class Customer:
                         # load into Services object
                         try:
                             serviceid = result[int(usr_input)][0]
-                            service_type = result[int(usr_input)][2]
-                            service_status = result[int(usr_input)][3]
-                            rate = result[int(usr_input)][4]
+                            balance = result[int(usr_input)][2]
+                            service_type = result[int(usr_input)][3]
+                            service_status = result[int(usr_input)][4]
+                            rate = result[int(usr_input)][5]
 
-                            service = Services(serviceid, service_type, service_status, rate)
+                            service = Services(serviceid, service_type, balance, service_status, rate)
                             print (service)
 
                             # access service menu

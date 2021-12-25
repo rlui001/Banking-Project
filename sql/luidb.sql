@@ -28,6 +28,7 @@ CREATE TABLE Account (
 CREATE TABLE Services (
     serviceid serial UNIQUE NOT NULL,
     cid int NOT NULL,
+    balance int NOT NULL,
     service_type char(50) NOT NULL,
     service_status char(50) NOT NULL,
     rate float NOT NULL,
