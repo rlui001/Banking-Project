@@ -1,15 +1,15 @@
 
 class Account:
     
-    def __init__ (self, id, balance=0):
+    def __init__ (self, id, balance=0, terminate=False):
         self._id = id
         if balance < 0:
             raise ValueError('Balance cannot be negative')
         self._balance = balance
-        self._terminate = False
+        self._terminate = terminate
 
     def __str__ (self):
-        return f'\nBalance: {self._balance} \nTermination Status: {self._terminate}\n'
+        return f'\nAccount ID: {self._id}\nBalance: {self._balance} \nTermination Status: {self._terminate}\n'
 
     @property
     def id(self):
@@ -41,13 +41,14 @@ class Account:
 
 class CheckingAccount(Account):
 
-    def __init__ (self, id):
-        super(CheckingAccount, self).__init__(id)
-        self._rate = 0
+    def __init__ (self, id, balance, rate, terminate):
+        """Used when loading result from DB."""
+        super(CheckingAccount, self).__init__(id, balance, terminate)
+        self._rate = rate
         self._account_type = 'Checking'
 
     def __str__ (self):
-        return f'\nAccount Type: {self._account_type}\nBalance: {self._balance}\nRate: {self._rate}\nTermination Status: {self._terminate}\n'
+        return f'\nAccount ID: {self._id}\nAccount Type: {self._account_type}\nBalance: {self._balance}\nRate: {self._rate}\nTermination Status: {self._terminate}\n'
 
     @property
     def rate(self):
@@ -60,13 +61,14 @@ class CheckingAccount(Account):
 
 class SavingsAccount(Account):
 
-    def __init__ (self, id):
-        super(SavingsAccount, self).__init__(id)
-        self._rate = 0.05
+    def __init__ (self, id, balance, rate, terminate):
+        """Used when loading result from DB."""
+        super(SavingsAccount, self).__init__(id, balance, terminate)
+        self._rate = rate
         self._account_type = 'Savings'
 
     def __str__ (self):
-        return f'\nAccount Type: {self._account_type}\nBalance: {self._balance}\nRate: {self._rate}\nTermination Status: {self._terminate}\n'
+        return f'\nAccount ID: {self._id}\nAccount Type: {self._account_type}\nBalance: {self._balance}\nRate: {self._rate}\nTermination Status: {self._terminate}\n'
 
     @property
     def rate(self):

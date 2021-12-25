@@ -1,6 +1,7 @@
 import enum
+from typing import Type
 import helper
-from Account import CheckingAccount
+from Account import CheckingAccount, SavingsAccount
 
 class Customer:
 
@@ -96,12 +97,17 @@ class Customer:
 
                 # load into account object
                 try:
+                    accountid = result[int(usr_input)][0]
+                    balance = result[int(usr_input)][2]
+                    rate = result[int(usr_input)][3]
                     account_type = result[int(usr_input)][4]
+                    terminate = result[int(usr_input)][5]
+
                     if account_type == 'Checking':
-                        account = CheckingAccount(self._ssn)
-                        print (str(account))
+                        account = CheckingAccount(accountid, balance, rate, terminate)
                     elif account_type == 'Savings':
-                        pass
+                        account = SavingsAccount(self._ssn)
+                    print (str(account))
                 except:
                     print ('Account not found.')
 
