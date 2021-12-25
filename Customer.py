@@ -148,14 +148,11 @@ class Customer:
                         service_status = result[int(usr_input)][3]
                         rate = result[int(usr_input)][4]
 
-                        #service = Services -todo
-                        if account_type == 'Checking':
-                            account = CheckingAccount(accountid, balance, rate, terminate)
-                        elif account_type == 'Savings':
-                            account = SavingsAccount(accountid, balance, rate, terminate)
-                        print (account)
+                        service = Services(serviceid, service_type, service_status, rate)
+                        print (service)
+                        
                         # access service menu
-                        # service.customer_service_menu(conn)
+                        service.customer_services_menu(conn)
                     except Exception as e:
                         print (e)
                 else:
