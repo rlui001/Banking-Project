@@ -1,1 +1,10 @@
-2021-12-25 18:47:55,353 :: ERROR :: test error
+2021-12-25 19:23:59,008 :: ERROR :: TEST
+Traceback (most recent call last):
+  File "/Users/ron/Desktop/Springboard/Banking Project/interface.py", line 73, in <module>
+    test = 'abc' + 10
+TypeError: can only concatenate str (not "int") to str
+2021-12-25 19:25:24,606 :: ERROR :: TEST
+Traceback (most recent call last):
+  File "/Users/ron/Desktop/Springboard/Banking Project/interface.py", line 73, in <module>
+    test = 'abc' + 10
+TypeError: can only concatenate str (not "int") to str
