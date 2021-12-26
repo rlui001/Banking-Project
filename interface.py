@@ -70,7 +70,12 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.WARNING, filename=cwd + '/Logs/messages.log',\
         format='%(asctime)s :: %(levelname)s :: %(message)s')
 
-    engine = create_engine('mysql+pymysql://root:password@127.0.0.1/LuiBank')
+    # take username/password for mysql instance connection
+    usr = input('\nPlease enter your mysql username: ')
+    pwd = input('\nPlease enter your mysql password: ')
+    db_string = 'mysql+pymysql://' + usr + ':' + pwd + '@127.0.0.1/LuiBank'
+
+    engine = create_engine(db_string)
     with engine.connect() as conn:
 
         usr_input = input(startMenu())
