@@ -89,7 +89,8 @@ class Customer:
                 # sql pull from database to grab existing accounts
                 stmt = "SELECT * FROM Account WHERE cid = %s"
                 result = helper.execute_db(stmt, self._ssn, conn, 'fetchall')
-                print ('\n'.join(['Selection: ' + str(i) + ' - ' + row['account_type'] for i, row in enumerate(result)]))
+                print ('\n'.join(['Selection: ' + str(i) + ' - ' \
+                    + row['account_type'] for i, row in enumerate(result)]))
 
                 # user selects which account to access 
                 usr_input = helper.request_input('Selection #', 'numeric')
@@ -125,7 +126,8 @@ class Customer:
                     val = self._ssn
                     result = helper.execute_db(stmt, val, conn, 'fetchall')
                     if result:
-                        print ('\n'.join(['Selection: ' + str(i) + ' - ' + row['service_type'] + ' - ' + row['service_status'] for i, row in enumerate(result)]))
+                        print ('\n'.join(['Selection: ' + str(i) + ' - ' + \
+                            row['service_type'] + ' - ' + row['service_status'] for i, row in enumerate(result)]))
 
                         # user selects which account to access 
                         usr_input = helper.request_input('Selection #', 'numeric')
@@ -156,7 +158,8 @@ class Customer:
             elif usr_input == '7':
                 if customer_updated:
                     print(self)
-                    usr_input = input('Personal info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: \n')
+                    usr_input = input('Personal info was updated. If the changes above are incorrect,\
+                         type N to discard changes. Otherwise, enter anything to proceed: \n')
                     helper.update_db(usr_input, self, conn)
                 print ('Thank you for using Lui Bank.\n')
                 return

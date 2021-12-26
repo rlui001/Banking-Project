@@ -1,4 +1,3 @@
-from typing import Type
 from sqlalchemy import create_engine, exc
 from sqlalchemy.sql.functions import user
 from Account import *

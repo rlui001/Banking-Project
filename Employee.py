@@ -91,7 +91,8 @@ class Employee:
             elif usr_input == '6':
                 if employee_updated:
                     print(self)
-                    usr_input = input('Employee info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: \n')
+                    usr_input = input('Employee info was updated. If the changes above are incorrect, \
+                        type N to discard changes. Otherwise, enter anything to proceed: \n')
                     helper.update_db(usr_input, self, conn)
                 print ('Thank you for being a Lui Bank employee.\n')
                 return

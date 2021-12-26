@@ -17,7 +17,8 @@ class Services:
         self._rate = rate
 
     def __str__ (self):
-        return f'\nService ID: {self._id}\nService Type: {self._type}\nBalance: {self._balance}\nService Status: {self._status} \nService Rate: {self._rate}\n'
+        return f'\nService ID: {self._id}\nService Type: {self._type}\nBalance: {self._balance}\
+            \nService Status: {self._status} \nService Rate: {self._rate}\n'
 
     @property
     def id(self):
