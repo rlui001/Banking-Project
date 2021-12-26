@@ -49,8 +49,8 @@ def update_db (usr_input, obj, conn):
 
         elif isinstance(obj, Services):
             # Build stmt and val for Services record update
-            stmt = 'UPDATE Services SET balance = %s, service_status = %s WHERE serviceid = %s'
-            val = (obj._balance, obj._status, obj._id)
+            stmt = 'UPDATE Services SET balance = %s, service_status = %s, rate = %s WHERE serviceid = %s'
+            val = (obj._balance, obj._status, obj._rate, obj._id)
 
         elif isinstance(obj, Employee):
             # Build stmt and val for Employeee record update

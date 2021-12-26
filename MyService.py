@@ -124,6 +124,57 @@ class Services:
         Employee services menu to view/update a service.
         conn: connection to DB
         """
-        pass
+        menu = """
+        Please select an option:  
+        1. Adjust rate (automatically sets to Pending)
+        2. Adjust balance (automatically sets to Pending)
+        3. Mark Pending
+        4. Reject
+        5. Quit
+        """
+        if self._status == 'Accepted':
+            print ('This service has already been accepted. You can only view the terms:\n')
+            print (self)
+            input('Enter any key to return back to customer menu...\n')
+            return
+
+        service_updated = False
+        print (menu)
+        while True:
+            usr_input = input(f'[Connected - Service ID {self._id}]: ')
+
+            if usr_input == '1':
+                self._rate = helper.request_input('adjusted rate', 'alphanumeric')
+                self._status = 'Pending'
+                print (f'\nRate updated: {self._rate}')
+                service_updated = True
+
+            elif usr_input == '2':
+                self._balance = helper.request_input('adjusted balance', 'numeric')
+                self._status = 'Pending'
+                print (f'Balance set to {self._balance}. Balance will be updated during log off.')
+                service_updated = True
+
+            elif usr_input == '3':
+                self._status = 'Pending'
+                print (f'Status set to {self._status}. Status will be updated during log off.')
+                service_updated = True
+
+            elif usr_input == '4':
+                self._status = 'Rejected'
+                print (f'Status set to {self._status}. Status will be updated during log off.')
+                service_updated = True
+
+            elif usr_input == '5':
+                if service_updated:
+                    print(self)
+                    usr_input = input('Service info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: \n')
+                    helper.update_db(usr_input, self, conn)
+                print ('Logging off of service.\n')
+                return
+            else:
+                print ('Invalid input. Please try again.\n')
+
+            print (menu)
 
     

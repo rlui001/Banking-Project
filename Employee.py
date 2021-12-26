@@ -1,4 +1,5 @@
 import helper
+from MyService import Services
 from Account import CheckingAccount, SavingsAccount
 class Employee:
     MIN_SALARY = 60000
@@ -84,6 +85,7 @@ class Employee:
                 #show all services
                 #take user input to select service
                 #call service.employee_menu() - build this function in Service class
+                self.access_services(conn)
                 pass
 
             elif usr_input == '5':
@@ -133,22 +135,54 @@ class Employee:
         if result:
             print (['Selection: ' + str(i) + ' - Customer SSN: ' + str(row['cid']) + ' - Type: ' + row['account_type'] for i, row in enumerate(result)])
         
-        # user selects which account to access 
-        usr_input = helper.request_input('Selection #', 'numeric')
-        # load into account object
-        try:
-            accountid = result[int(usr_input)][0]
-            balance = result[int(usr_input)][2]
-            rate = result[int(usr_input)][3]
-            account_type = result[int(usr_input)][4]
-            terminate = result[int(usr_input)][5]
+            # user selects which account to access 
+            usr_input = helper.request_input('Selection #', 'numeric')
+            # load into account object
+            try:
+                accountid = result[int(usr_input)][0]
+                balance = result[int(usr_input)][2]
+                rate = result[int(usr_input)][3]
+                account_type = result[int(usr_input)][4]
+                terminate = result[int(usr_input)][5]
 
-            if account_type == 'Checking':
-                account = CheckingAccount(accountid, balance, rate, terminate)
-            elif account_type == 'Savings':
-                account = SavingsAccount(accountid, balance, rate, terminate)
-            print (account)
-            # access account menu
-            account.employee_account_menu(conn)
-        except Exception as e:
-            print (e)
+                if account_type == 'Checking':
+                    account = CheckingAccount(accountid, balance, rate, terminate)
+                elif account_type == 'Savings':
+                    account = SavingsAccount(accountid, balance, rate, terminate)
+                print (account)
+                # access account menu
+                account.employee_account_menu(conn)
+            except Exception as e:
+                print (e)
+        else:
+            print ('There are no accounts.\n')
+
+    def access_services(self, conn):
+        #show all accounts
+        stmt = "SELECT * FROM Services"
+        try:
+            result = conn.execute(stmt).fetchall()
+        except:
+            raise Exception('Unable to select records from Services table.\n')
+        if result:
+            print (['Selection: ' + str(i) + ' - Customer SSN: ' + str(row['cid']) + ' - Type: ' + row['service_type'] for i, row in enumerate(result)])
+        
+            # user selects which account to access 
+            usr_input = helper.request_input('Selection #', 'numeric')
+            # load into Services object
+            try:
+                serviceid = result[int(usr_input)][0]
+                balance = result[int(usr_input)][2]
+                service_type = result[int(usr_input)][3]
+                service_status = result[int(usr_input)][4]
+                rate = result[int(usr_input)][5]
+
+                service = Services(serviceid, service_type, balance, service_status, rate)
+                print (service)
+
+                # access service menu
+                service.employee_services_menu(conn)
+            except Exception as e:
+                print (e)
+        else:
+            print ('There are no services.\n')
