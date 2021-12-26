@@ -70,24 +70,18 @@ def execute_db (stmt, val, conn, op=''):
     conn: connection to DB
     op: first, fetchall, update
     """
-    if op == 'first':
-        try:
+    try:
+        if op == 'first':
             result = conn.execute(stmt, val).first()
-        except:
-            logging.error(f'Failed {stmt} query.', exc_info=True)
-            print ('Unable to complete request.\n')
-    elif op == 'fetchall':
-        try:
+
+        elif op == 'fetchall':
             result = conn.execute(stmt, val).fetchall()
-        except:
-            logging.error(f'Failed {stmt} query.', exc_info=True)
-            print ('Unable to complete request.\n')
-    else:
-        try:
+
+        else:
             result = conn.execute(stmt, val)
-        except:
-            logging.error(f'Failed {stmt} query.', exc_info=True)
-            print ('Unable to complete request.\n')
+    except:
+        logging.error(f'Failed {stmt} query.', exc_info=True)
+        print ('Unable to complete request.\n')
 
     return result
 
