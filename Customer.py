@@ -91,7 +91,7 @@ class Customer:
                 # sql pull from database to grab existing accounts
                 stmt = "SELECT * FROM Account WHERE cid = %s"
                 result = helper.execute_db(stmt, self._ssn, conn, 'fetchall')
-                print (['Selection: ' + str(i) + ' - ' + row['account_type'] for i, row in enumerate(result)])
+                print ('\n'.join(['Selection: ' + str(i) + ' - ' + row['account_type'] for i, row in enumerate(result)]))
 
                 # user selects which account to access 
                 usr_input = helper.request_input('Selection #', 'numeric')
@@ -135,30 +135,21 @@ class Customer:
                 usr_input = helper.request_input('selection (view/request)', 'alpha')
                 if usr_input == 'view':
                     # pull from Services table where cid = user ssn and service_status != Rejected
-                    stmt = "SELECT * FROM Services WHERE cid = %s AND service_type <> %s"
-                    val = (self._ssn, 'Rejected')
+                    stmt = "SELECT * FROM Services WHERE cid = %s"
+                    val = self._ssn
                     result = helper.execute_db(stmt, val, conn, 'fetchall')
                     if result:
-                        print (['Selection: ' + str(i) + ' - ' + row['service_type'] + ' - ' + row['service_status'] for i, row in enumerate(result)])
+                        print ('\n'.join(['Selection: ' + str(i) + ' - ' + row['service_type'] + ' - ' + row['service_status'] for i, row in enumerate(result)]))
 
                         # user selects which account to access 
                         usr_input = helper.request_input('Selection #', 'numeric')
 
                         # load into Services object
-                        try:
-                            serviceid = result[int(usr_input)][0]
-                            balance = result[int(usr_input)][2]
-                            service_type = result[int(usr_input)][3]
-                            service_status = result[int(usr_input)][4]
-                            rate = result[int(usr_input)][5]
+                        service = helper.load_services_object(usr_input, result)
 
-                            service = Services(serviceid, service_type, balance, service_status, rate)
-                            print (service)
+                        # access service menu
+                        service.customer_services_menu(conn)
 
-                            # access service menu
-                            service.customer_services_menu(conn)
-                        except Exception as e:
-                            print (e)
                     else:
                         print ('You currently have no services.\n')
                 elif usr_input == 'request':

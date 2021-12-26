@@ -88,3 +88,23 @@ def execute_db (stmt, val, conn, op=''):
             raise Exception(f'Failed due to: {e}')
 
     return result
+
+def load_services_object(usr_input, result):
+    """
+    Load and return a Services object
+    usr_input: String, user selection
+    result: list of results from query
+    """
+    # load into Services object
+    try:
+        serviceid = result[int(usr_input)][0]
+        balance = result[int(usr_input)][2]
+        service_type = result[int(usr_input)][3]
+        service_status = result[int(usr_input)][4]
+        rate = result[int(usr_input)][5]
+
+        service = Services(serviceid, service_type, balance, service_status, rate)
+        print (service)
+        return service
+    except Exception as e:
+        print (e)

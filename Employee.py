@@ -1,3 +1,4 @@
+import re
 import helper
 from MyService import Services
 from Account import CheckingAccount, SavingsAccount
@@ -82,9 +83,6 @@ class Employee:
                 self.access_accounts(conn)
 
             elif usr_input == '4':
-                #show all services
-                #take user input to select service
-                #call service.employee_menu() - build this function in Service class
                 self.access_services(conn)
                 pass
 
@@ -114,7 +112,7 @@ class Employee:
         result = helper.execute_db(stmt, val, conn, 'fetchall')
         # if there are results
         if result:
-            print (['Selection: ' + str(i) + ' - ' + row['account_type'] + ' - ' + str(row['terminate']) for i, row in enumerate(result)])
+            print ('\n'.join(['Selection: ' + str(i) + ' - ' + row['account_type'] + ' - ' + str(row['terminate']) for i, row in enumerate(result)]))
         # ask for confirmation
             if input('Please enter "confirm" to delete all accounts marked for termination: ') == 'confirm':
                 stmt_del = "DELETE FROM Account WHERE terminate = %s"
@@ -133,7 +131,7 @@ class Employee:
         except:
             raise Exception('Unable to select records from Account table.\n')
         if result:
-            print (['Selection: ' + str(i) + ' - Customer SSN: ' + str(row['cid']) + ' - Type: ' + row['account_type'] for i, row in enumerate(result)])
+            print ('\n'.join(['Selection: ' + str(i) + ' - Customer SSN: ' + str(row['cid']) + ' - Type: ' + row['account_type'] for i, row in enumerate(result)]))
         
             # user selects which account to access 
             usr_input = helper.request_input('Selection #', 'numeric')
@@ -165,24 +163,14 @@ class Employee:
         except:
             raise Exception('Unable to select records from Services table.\n')
         if result:
-            print (['Selection: ' + str(i) + ' - Customer SSN: ' + str(row['cid']) + ' - Type: ' + row['service_type'] for i, row in enumerate(result)])
+            print ('\n'.join(['Selection: ' + str(i) + ' - Customer SSN: ' + str(row['cid']) + ' - Type: ' + row['service_type'] + ' - Status: ' + row['service_status'] for i, row in enumerate(result)]))
         
             # user selects which account to access 
             usr_input = helper.request_input('Selection #', 'numeric')
             # load into Services object
-            try:
-                serviceid = result[int(usr_input)][0]
-                balance = result[int(usr_input)][2]
-                service_type = result[int(usr_input)][3]
-                service_status = result[int(usr_input)][4]
-                rate = result[int(usr_input)][5]
+            service = helper.load_services_object(usr_input, result)
+            
+            service.employee_services_menu(conn)
 
-                service = Services(serviceid, service_type, balance, service_status, rate)
-                print (service)
-
-                # access service menu
-                service.employee_services_menu(conn)
-            except Exception as e:
-                print (e)
         else:
             print ('There are no services.\n')

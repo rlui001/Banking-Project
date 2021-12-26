@@ -138,6 +138,12 @@ class Services:
             input('Enter any key to return back to customer menu...\n')
             return
 
+        if self._status == 'Rejectede':
+            print ('This service has already been rejected. You can only view the terms:\n')
+            print (self)
+            input('Enter any key to return back to customer menu...\n')
+            return
+
         service_updated = False
         print (menu)
         while True:
