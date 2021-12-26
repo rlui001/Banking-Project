@@ -12,6 +12,10 @@ A simple banking system powered by Python3, SQLAlchemy, and mySQL.
 ## Banking Project UML Diagram
 ![umlpng](https://github.com/rlui001/Banking-Project/blob/main/diagram/Banking%20Project%20UML%20Diagram%20v1.1.png?raw=true)
 
+## Pre-requisites
++ Please make sure all the requirements are fulfilled and mysql is set up properly. 
++ Run the luidb.sql file and ensure the tables and records have been created successfully before executing interface.py
+
 ## Requirements
 + sqlalchemy==1.4.22
 + mysql==8.0.22
