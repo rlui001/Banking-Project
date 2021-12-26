@@ -1,3 +1,4 @@
 sqlalchemy==1.4.22
 mysql==8.0.22
 python==3.9.7
+pymysql==1.0.2
