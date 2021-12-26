@@ -55,17 +55,13 @@ def login(conn, user_type):
 
     result = execute_db(stmt, ssn, conn, 'first')
     if not result:
-        raise ValueError("No customer with that SSN found.")
+        raise ValueError("No user with that SSN found.")
 
     if user_type == 'Employee':
         return Employee(str(result[0]), result[1], result[2], result[3])
 
     elif user_type == 'Customer':
         return Customer(str(result[0]), result[1], result[2], result[3])
-
-
-
-
 
 
 if __name__ == "__main__":

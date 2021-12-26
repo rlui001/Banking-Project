@@ -105,6 +105,32 @@ def load_services_object(usr_input, result):
 
         service = Services(serviceid, service_type, balance, service_status, rate)
         print (service)
+        
         return service
+
+    except Exception as e:
+        print (e)
+
+def load_account_object(usr_input, result):
+    """
+    Load and return an Account object
+    usr_input: String, user selection
+    result: list of results from query
+    """
+    try:
+        accountid = result[int(usr_input)][0]
+        balance = result[int(usr_input)][2]
+        rate = result[int(usr_input)][3]
+        account_type = result[int(usr_input)][4]
+        terminate = result[int(usr_input)][5]
+
+        if account_type == 'Checking':
+            account = CheckingAccount(accountid, balance, rate, terminate)
+        elif account_type == 'Savings':
+            account = SavingsAccount(accountid, balance, rate, terminate)
+        print (account)
+
+        return account
+
     except Exception as e:
         print (e)

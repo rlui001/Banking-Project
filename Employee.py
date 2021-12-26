@@ -136,22 +136,10 @@ class Employee:
             # user selects which account to access 
             usr_input = helper.request_input('Selection #', 'numeric')
             # load into account object
-            try:
-                accountid = result[int(usr_input)][0]
-                balance = result[int(usr_input)][2]
-                rate = result[int(usr_input)][3]
-                account_type = result[int(usr_input)][4]
-                terminate = result[int(usr_input)][5]
+            account = helper.load_account_object(usr_input, result)
+                
+            account.employee_account_menu(conn)
 
-                if account_type == 'Checking':
-                    account = CheckingAccount(accountid, balance, rate, terminate)
-                elif account_type == 'Savings':
-                    account = SavingsAccount(accountid, balance, rate, terminate)
-                print (account)
-                # access account menu
-                account.employee_account_menu(conn)
-            except Exception as e:
-                print (e)
         else:
             print ('There are no accounts.\n')
 

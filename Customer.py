@@ -1,4 +1,5 @@
 import enum
+import re
 from typing import Type
 import helper
 from Account import CheckingAccount, SavingsAccount
@@ -97,22 +98,10 @@ class Customer:
                 usr_input = helper.request_input('Selection #', 'numeric')
 
                 # load into account object
-                try:
-                    accountid = result[int(usr_input)][0]
-                    balance = result[int(usr_input)][2]
-                    rate = result[int(usr_input)][3]
-                    account_type = result[int(usr_input)][4]
-                    terminate = result[int(usr_input)][5]
+                account = helper.load_account_object(usr_input, result)
 
-                    if account_type == 'Checking':
-                        account = CheckingAccount(accountid, balance, rate, terminate)
-                    elif account_type == 'Savings':
-                        account = SavingsAccount(accountid, balance, rate, terminate)
-                    print (account)
-                    # access account menu
-                    account.account_menu(conn)
-                except Exception as e:
-                    print (e)
+                # access account menu
+                account.account_menu(conn)
 
             elif usr_input == '5':
                 # pull from DB where account_type = 'Savings'
@@ -152,6 +141,7 @@ class Customer:
 
                     else:
                         print ('You currently have no services.\n')
+
                 elif usr_input == 'request':
                     service_type = helper.request_input('Service type', 'alpha')
                     balance = int(helper.request_input('request amount', 'numeric'))
@@ -162,6 +152,7 @@ class Customer:
                     helper.execute_db(stmt, val, conn)
 
                     print ('Service requested successfully.')
+                    
                 else:
                     print ('Please enter a valid choice.\n')
 
