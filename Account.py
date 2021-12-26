@@ -86,7 +86,8 @@ class Account:
             elif usr_input == '5':
                 if account_updated:
                     print(self)
-                    usr_input = input('Account info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: \n')
+                    usr_input = input('Account info was updated. If the changes above are incorrect,\
+                         type N to discard changes. Otherwise, enter anything to proceed: \n')
                     helper.update_db(usr_input, self, conn)
                 print ('Logging off of account.\n')
                 return
@@ -94,10 +95,6 @@ class Account:
                 print ('Invalid input. Please try again.\n')
 
             print (menu)
-
-
-
-
 
 
 class CheckingAccount(Account):
@@ -114,7 +111,8 @@ class CheckingAccount(Account):
         self._account_type = 'Checking'
 
     def __str__ (self):
-        return f'\nAccount ID: {self._id}\nAccount Type: {self._account_type}\nBalance: {self._balance}\nRate: {self._rate}\nTermination Status: {self._terminate}\n'
+        return f'\nAccount ID: {self._id}\nAccount Type: {self._account_type}\nBalance: {self._balance}\
+            \nRate: {self._rate}\nTermination Status: {self._terminate}\n'
 
     @property
     def rate(self):
@@ -154,7 +152,8 @@ class CheckingAccount(Account):
             elif usr_input == '3':
                 if account_updated:
                     print(self)
-                    usr_input = input('Account info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: \n')
+                    usr_input = input('Account info was updated. If the changes above are incorrect,\
+                         type N to discard changes. Otherwise, enter anything to proceed: \n')
                     helper.update_db(usr_input, self, conn)
                 print ('Logging off of account.\n')
                 return
@@ -218,7 +217,8 @@ class SavingsAccount(Account):
             elif usr_input == '3':
                 if account_updated:
                     print(self)
-                    usr_input = input('Account info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: \n')
+                    usr_input = input('Account info was updated. If the changes above are incorrect,\
+                         type N to discard changes. Otherwise, enter anything to proceed: \n')
                     helper.update_db(usr_input, self, conn)
                 print ('Logging off of account.\n')
                 return
