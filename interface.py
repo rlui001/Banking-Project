@@ -1,4 +1,3 @@
-from sqlalchemy.sql.type_api import UserDefinedType
 from helper import *
 import logging
 import sys

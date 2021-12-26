@@ -1,5 +1,4 @@
 from sqlalchemy import create_engine
-from sqlalchemy.sql.functions import user
 from Account import *
 from Customer import Customer
 from MyService import Services
