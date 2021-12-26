@@ -1,6 +1,3 @@
-import enum
-import re
-from typing import Type
 import helper
 from Account import CheckingAccount, SavingsAccount
 from MyService import Services
@@ -152,7 +149,7 @@ class Customer:
                     helper.execute_db(stmt, val, conn)
 
                     print ('Service requested successfully.')
-                    
+
                 else:
                     print ('Please enter a valid choice.\n')
 
