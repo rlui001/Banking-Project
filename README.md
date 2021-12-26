@@ -1,7 +1,5 @@
-Initial commit
-
 TO-DO:
-    -Add Services menu functions
+    -Implement logging
     -Update UML Diagram to reflect new design changes
 
 
