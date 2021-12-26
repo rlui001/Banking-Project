@@ -119,6 +119,10 @@ class CheckingAccount(Account):
     @property
     def rate(self):
         return self._rate
+
+    @rate.setter
+    def rate(self, rate):
+        self._rate = float(rate)
     
     @property
     def account_type(self):
@@ -133,12 +137,12 @@ class CheckingAccount(Account):
         """
         print (menu)
         account_updated = False
-        
+
         while True:
             usr_input = input(f'[Connected - Account ID: {self._id}]: ')
 
             if usr_input == '1':
-                self._rate = helper.request_input('adjusted rate', 'float')
+                self._rate = helper.request_input('adjusted rate', 'alphanumeric')
                 print (f'\nRate updated: {self._rate}')
                 account_updated = True
 
@@ -179,11 +183,47 @@ class SavingsAccount(Account):
     @property
     def rate(self):
         return self._rate
+
+    @rate.setter
+    def rate(self, rate):
+        self._rate = float(rate)
     
     @property
     def account_type(self):
         return self._account_type
 
     def employee_account_menu(self, conn):
-        pass
+        menu = """
+        Please select an option:  
+        1. Adjust rate
+        2. Reset termination status
+        3. Quit
+        """
+        print (menu)
+        account_updated = False
+
+        while True:
+            usr_input = input(f'[Connected - Account ID: {self._id}]: ')
+
+            if usr_input == '1':
+                self._rate = helper.request_input('adjusted rate', 'alphanumeric')
+                print (f'\nRate updated: {self._rate}')
+                account_updated = True
+
+            elif usr_input == '2':
+                self._terminate = False
+                print ('\nTermination status reset. Transaction is finalized when logging off.\n')
+                account_updated = True
+
+            elif usr_input == '3':
+                if account_updated:
+                    print(self)
+                    usr_input = input('Account info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: \n')
+                    helper.update_db(usr_input, self, conn)
+                print ('Logging off of account.\n')
+                return
+            else:
+                print ('Invalid input. Please try again.\n')
+
+            print (menu)
 

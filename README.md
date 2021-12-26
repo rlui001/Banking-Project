@@ -2,7 +2,6 @@ Initial commit
 
 TO-DO:
     -Add Services menu functions
-    -Add Employee class
     -Update UML Diagram to reflect new design changes
 
 

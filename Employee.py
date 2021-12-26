@@ -1,5 +1,5 @@
 import helper
-
+from Account import CheckingAccount, SavingsAccount
 class Employee:
     MIN_SALARY = 60000
     def __init__ (self, ssn, first, last, salary):
@@ -78,10 +78,7 @@ class Employee:
                 employee_updated = True
 
             elif usr_input == '3':
-                #show all accounts
-                #take user input to select account
-                #call account.employee_menu() - build this functioon in Account class
-                pass
+                self.access_accounts(conn)
 
             elif usr_input == '4':
                 #show all services
@@ -125,3 +122,33 @@ class Employee:
                 print ('Accounts were not deleted.\n')
         else:
             print ('There are currently no accounts marked for termination.\n')
+
+    def access_accounts(self, conn):
+        #show all accounts
+        stmt = "SELECT * FROM Account"
+        try:
+            result = conn.execute(stmt).fetchall()
+        except:
+            raise Exception('Unable to select records from Account table.\n')
+        if result:
+            print (['Selection: ' + str(i) + ' - Customer SSN: ' + str(row['cid']) + ' - Type: ' + row['account_type'] for i, row in enumerate(result)])
+        
+        # user selects which account to access 
+        usr_input = helper.request_input('Selection #', 'numeric')
+        # load into account object
+        try:
+            accountid = result[int(usr_input)][0]
+            balance = result[int(usr_input)][2]
+            rate = result[int(usr_input)][3]
+            account_type = result[int(usr_input)][4]
+            terminate = result[int(usr_input)][5]
+
+            if account_type == 'Checking':
+                account = CheckingAccount(accountid, balance, rate, terminate)
+            elif account_type == 'Savings':
+                account = SavingsAccount(accountid, balance, rate, terminate)
+            print (account)
+            # access account menu
+            account.employee_account_menu(conn)
+        except Exception as e:
+            print (e)
