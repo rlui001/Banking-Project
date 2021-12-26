@@ -1,9 +1,10 @@
-from sqlalchemy import create_engine, exc
+from sqlalchemy import create_engine
 from sqlalchemy.sql.functions import user
 from Account import *
 from Customer import Customer
 from MyService import Services
 from Employee import Employee
+import logging
 
 def request_input(req, type):
     """
@@ -73,18 +74,21 @@ def execute_db (stmt, val, conn, op=''):
     if op == 'first':
         try:
             result = conn.execute(stmt, val).first()
-        except exc.SQLAlchemyError as e:
-            raise Exception(f'Failed due to: {e}')
+        except:
+            logging.error(f'Failed {stmt} query.', exc_info=True)
+            print ('Unable to complete request.\n')
     elif op == 'fetchall':
         try:
             result = conn.execute(stmt, val).fetchall()
-        except exc.SQLAlchemyError as e:
-            raise Exception(f'Failed due to: {e}')
+        except:
+            logging.error(f'Failed {stmt} query.', exc_info=True)
+            print ('Unable to complete request.\n')
     else:
         try:
             result = conn.execute(stmt, val)
-        except exc.SQLAlchemyError as e:
-            raise Exception(f'Failed due to: {e}')
+        except:
+            logging.error(f'Failed {stmt} query.', exc_info=True)
+            print ('Unable to complete request.\n')
 
     return result
 
@@ -107,8 +111,9 @@ def load_services_object(usr_input, result):
         
         return service
 
-    except Exception as e:
-        print (e)
+    except:
+        logging.error(f'Failed to create a Service object', exc_info=True)
+        raise
 
 def load_account_object(usr_input, result):
     """
@@ -131,5 +136,6 @@ def load_account_object(usr_input, result):
 
         return account
 
-    except Exception as e:
-        print (e)
+    except:
+        logging.error(f'Failed to create Account object', exc_info=True)
+        raise

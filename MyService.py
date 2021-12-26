@@ -17,8 +17,8 @@ class Services:
         self._rate = rate
 
     def __str__ (self):
-        return f'\nService ID: {self._id}\nService Type: {self._type}\nBalance: {self._balance}\
-            \nService Status: {self._status} \nService Rate: {self._rate}\n'
+        return f'\nService ID: {self._id}\nService Type: {self._type}\nBalance: {self._balance}' + \
+            f'\nService Status: {self._status} \nService Rate: {self._rate}\n'
 
     @property
     def id(self):
@@ -109,8 +109,8 @@ class Services:
             elif usr_input == '4':
                 if service_updated:
                     print(self)
-                    usr_input = input('Service info was updated. If the changes above are incorrect,\
-                         type N to discard changes. Otherwise, enter anything to proceed: \n')
+                    usr_input = input('Service info was updated. If the changes above are incorrect, ' + \
+                        'type N to discard changes. Otherwise, enter anything to proceed: \n')
                     helper.update_db(usr_input, self, conn)
                 print ('Logging off of service.\n')
                 return
@@ -176,8 +176,8 @@ class Services:
             elif usr_input == '5':
                 if service_updated:
                     print(self)
-                    usr_input = input('Service info was updated. If the changes above are incorrect,\
-                         type N to discard changes. Otherwise, enter anything to proceed: \n')
+                    usr_input = input('Service info was updated. If the changes above are incorrect, ' + \
+                        'type N to discard changes. Otherwise, enter anything to proceed: \n')
                     helper.update_db(usr_input, self, conn)
                 print ('Logging off of service.\n')
                 return

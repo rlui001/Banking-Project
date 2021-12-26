@@ -1,4 +1,5 @@
 import helper
+import logging
 from MyService import Services
 from Account import CheckingAccount, SavingsAccount
 class Employee:
@@ -91,8 +92,8 @@ class Employee:
             elif usr_input == '6':
                 if employee_updated:
                     print(self)
-                    usr_input = input('Employee info was updated. If the changes above are incorrect, \
-                        type N to discard changes. Otherwise, enter anything to proceed: \n')
+                    usr_input = input('Employee info was updated. If the changes above are incorrect, ' + \
+                        'type N to discard changes. Otherwise, enter anything to proceed: \n')
                     helper.update_db(usr_input, self, conn)
                 print ('Thank you for being a Lui Bank employee.\n')
                 return
@@ -112,7 +113,8 @@ class Employee:
         result = helper.execute_db(stmt, val, conn, 'fetchall')
         # if there are results
         if result:
-            print ('\n'.join(['Selection: ' + str(i) + ' - ' + row['account_type'] + ' - ' + str(row['terminate']) for i, row in enumerate(result)]))
+            print ('\n'.join(['Selection: ' + str(i) + ' - ' + row['account_type'] \
+                + ' - ' + str(row['terminate']) for i, row in enumerate(result)]))
         # ask for confirmation
             if input('Please enter "confirm" to delete all accounts marked for termination: ') == 'confirm':
                 stmt_del = "DELETE FROM Account WHERE terminate = %s"
@@ -129,9 +131,12 @@ class Employee:
         try:
             result = conn.execute(stmt).fetchall()
         except:
-            raise Exception('Unable to select records from Account table.\n')
+            logging.error('Failed SELECT * FROM Account query', exc_info=True)
+            print ('Unable to pull data from database.\n')
+
         if result:
-            print ('\n'.join(['Selection: ' + str(i) + ' - Customer SSN: ' + str(row['cid']) + ' - Type: ' + row['account_type'] for i, row in enumerate(result)]))
+            print ('\n'.join(['Selection: ' + str(i) + ' - Customer SSN: ' + str(row['cid']) \
+                + ' - Type: ' + row['account_type'] for i, row in enumerate(result)]))
         
             # user selects which account to access 
             usr_input = helper.request_input('Selection #', 'numeric')
@@ -149,9 +154,12 @@ class Employee:
         try:
             result = conn.execute(stmt).fetchall()
         except:
-            raise Exception('Unable to select records from Services table.\n')
+            logging.error('Failed SELECT * FROM Services query', exc_info=True)
+            print ('Unable to pull data from database.\n')
+
         if result:
-            print ('\n'.join(['Selection: ' + str(i) + ' - Customer SSN: ' + str(row['cid']) + ' - Type: ' + row['service_type'] + ' - Status: ' + row['service_status'] for i, row in enumerate(result)]))
+            print ('\n'.join(['Selection: ' + str(i) + ' - Customer SSN: ' + str(row['cid']) \
+                + ' - Type: ' + row['service_type'] + ' - Status: ' + row['service_status'] for i, row in enumerate(result)]))
         
             # user selects which account to access 
             usr_input = helper.request_input('Selection #', 'numeric')

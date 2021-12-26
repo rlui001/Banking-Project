@@ -1,5 +1,6 @@
 from sqlalchemy.sql.type_api import UserDefinedType
 from helper import *
+import logging
 import sys
 
 
@@ -66,7 +67,9 @@ def login(conn, user_type):
 
 
 if __name__ == "__main__":
- 
+    logging.basicConfig(level=logging.WARNING, filename='Desktop/Springboard/Banking Project/Logs/messages.log',\
+        format='%(asctime)s :: %(levelname)s :: %(message)s')
+
     engine = create_engine('mysql+pymysql://root:password@127.0.0.1/LuiBank')
     with engine.connect() as conn:
 
