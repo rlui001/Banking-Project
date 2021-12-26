@@ -1,6 +1,6 @@
 from helper import *
 import logging
-import sys
+import os
 
 
 def startMenu():
@@ -66,7 +66,8 @@ def login(conn, user_type):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.WARNING, filename='Desktop/Springboard/Banking Project/Logs/messages.log',\
+    cwd = os.path.dirname(os.path.realpath(__file__))
+    logging.basicConfig(level=logging.WARNING, filename=cwd + '/Logs/messages.log',\
         format='%(asctime)s :: %(levelname)s :: %(message)s')
 
     engine = create_engine('mysql+pymysql://root:password@127.0.0.1/LuiBank')
