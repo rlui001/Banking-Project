@@ -1,0 +1,99 @@
+(base) Ronsons-MacBook-Pro:Banking Project ron$ /opt/anaconda3/bin/python "/Users/ron/Desktop/Springboard/Banking Project/interface.py"
+
+Please enter your mysql username: root
+
+Please enter your mysql password: password
+
+    Welcome to the Lui Banking System. Please select an option:  
+        1. New customer
+        2. Existing customer
+        3. Employee login
+        4. Exit
+    1 
+Please enter your First name: Ronson
+Please enter your Last name: Lui
+Please enter your Home Address: Some address
+Please enter your Social Security Number: 123123123
+Name: Ronson Lui 
+Address: Some address 
+SSN: 123123123
+
+Registered successfully. A checking account has also been created automatically.
+
+System connection terminated...
+(base) Ronsons-MacBook-Pro:Banking Project ron$ /opt/anaconda3/bin/python "/Users/ron/Desktop/Springboard/Banking Project/interface.py"
+
+Please enter your mysql username: root
+
+Please enter your mysql password: password
+
+    Welcome to the Lui Banking System. Please select an option:  
+        1. New customer
+        2. Existing customer
+        3. Employee login
+        4. Exit
+    2
+Please enter your SSN to login: 123123123
+Welcome back to LuiBank, Ronson
+
+        Please select an option:  
+        1. Update first name
+        2. Update last name
+        3. Update address
+        4. Access accounts
+        5. Create a savings account
+        6. Services
+        7. Quit
+        
+[Connected - Ronson]: 3
+Please enter your Home Address: my new address
+Address updated.
+
+
+        Please select an option:  
+        1. Update first name
+        2. Update last name
+        3. Update address
+        4. Access accounts
+        5. Create a savings account
+        6. Services
+        7. Quit
+        
+[Connected - Ronson]: 1
+Please enter your First name: John
+First name updated.
+
+
+        Please select an option:  
+        1. Update first name
+        2. Update last name
+        3. Update address
+        4. Access accounts
+        5. Create a savings account
+        6. Services
+        7. Quit
+        
+[Connected - John]: 2
+Please enter your Last name: Doe
+Last name updated.
+
+
+        Please select an option:  
+        1. Update first name
+        2. Update last name
+        3. Update address
+        4. Access accounts
+        5. Create a savings account
+        6. Services
+        7. Quit
+        
+[Connected - John]: 7
+Name: John Doe 
+Address: my new address 
+SSN: 123123123
+
+Personal info was updated. If the changes above are incorrect, type N to discard changes. Otherwise, enter anything to proceed: 
+a
+Thank you for using Lui Bank.
+
+System connection terminated...
